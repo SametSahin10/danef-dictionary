@@ -14,6 +14,7 @@ dependencies:
   flutter_typeahead: ^1.7.0
   http: ^0.12.0+2
   json_annotation: ^2.0.0
+  fancy_bottom_navigation: ^0.3.2
 
 dev_dependencies:
   flutter_test:

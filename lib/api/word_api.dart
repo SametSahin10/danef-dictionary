@@ -1,6 +1,6 @@
 import 'package:danef_dictionary/api/network.dart';
 
-const String wordAPIURL = 'https://https://danef-dictionary-api.herokuapp.com';
+const String wordAPIURL = 'https://danef-dictionary-api.herokuapp.com';
 const String wordsString = 'words';
 
 class WordAPI {
