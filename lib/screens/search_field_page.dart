@@ -36,17 +36,26 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
                 height: 30,
                 child: IconButton(
                   icon: Icon(Icons.cancel),
-                  color: Colors.blue,
-                  disabledColor: Colors.blue,
+                  color: Colors.green,
+                  disabledColor: Colors.green,
                 ),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(18)),
+                borderSide: BorderSide(
+                  color: Colors.green
+                )
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(18)),
+                borderSide: BorderSide(
+                  color: Colors.green
+                )
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(18)),
                 borderSide: BorderSide(
-                  color: Colors.blue,
+                  color: Colors.green,
                   width: 1.5
                 )
               ),

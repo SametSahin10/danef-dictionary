@@ -14,7 +14,9 @@ dependencies:
   flutter_typeahead: ^1.7.0
   http: ^0.12.0+2
   json_annotation: ^2.0.0
-  fancy_bottom_navigation: ^0.3.2
+  fancy_bottom_navigation:
+    git:
+      url: https://github.com/skquark/fancy_bottom_navigation.git
 
 dev_dependencies:
   flutter_test:
