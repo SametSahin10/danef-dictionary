@@ -16,25 +16,25 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
           padding: EdgeInsets.all(16.0),
           child: TypeAheadField(
             textFieldConfiguration: TextFieldConfiguration(
-                textAlign: TextAlign.center,
-                style: DefaultTextStyle.of(context).style.copyWith(fontSize: 18),
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.blue,
-                        width: 1.5,
-                      ),
-                      borderRadius: new BorderRadius.circular(24.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.blue,
-                        width: 1.5,
-                      ),
-                      borderRadius: new BorderRadius.circular(16.0),
-                    ),
-                    hintStyle: TextStyle(fontSize: 18.0),
-                    hintText: 'Search a word')),
+              textAlign: TextAlign.center,
+              style: DefaultTextStyle.of(context).style.copyWith(fontSize: 18),
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.blue,
+                    width: 1.5,
+                  ),
+                  borderRadius: new BorderRadius.circular(24.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.blue,
+                    width: 1.5,
+                  ),
+                  borderRadius: new BorderRadius.circular(16.0),
+                ),
+                hintStyle: TextStyle(fontSize: 18.0),
+                hintText: 'Search a word')),
             suggestionsCallback: (pattern) {
               return pattern.isEmpty ? null : _getSuggestions(pattern);
             },
