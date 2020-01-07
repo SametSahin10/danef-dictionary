@@ -1,4 +1,4 @@
-import 'package:danef_dictionary/screens/Archive.dart';
+import 'package:danef_dictionary/screens/archive.dart';
 import 'package:danef_dictionary/screens/favorite_words.dart';
 import 'package:danef_dictionary/screens/search_field_page.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';

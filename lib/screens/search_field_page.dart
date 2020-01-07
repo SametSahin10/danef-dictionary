@@ -11,7 +11,8 @@ class SearchFieldPage extends StatefulWidget {
 }
 
 class _SearchFieldPageState extends State<SearchFieldPage> {
-  var dummmyWords = ['aaaxxx', 'bbbxxxx', 'cccccxxxx', 'dddxxxx'];
+  final _textEditingController = TextEditingController();
+  bool _isClearIconVisible = false;
 
   @override
   void initState() {
@@ -27,17 +28,27 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
         margin: EdgeInsets.only(left: 16.0, right: 16.0),
         child: TypeAheadField(
           textFieldConfiguration: TextFieldConfiguration(
+            controller: _textEditingController,
+            onChanged: (newValue) {
+              setState(() {
+                if (newValue.length == 0) {
+                  _isClearIconVisible = false;
+                } else {
+                  _isClearIconVisible = true;
+                }
+              });
+            },
             textAlign: TextAlign.center,
             style: DefaultTextStyle.of(context).style.copyWith(fontSize: 18),
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search),
-              suffix: Container(
-                width: 30,
-                height: 30,
+              suffixIcon: Visibility(
+                visible: _isClearIconVisible,
                 child: IconButton(
                   icon: Icon(Icons.cancel),
                   color: Colors.green,
                   disabledColor: Colors.green,
+                  onPressed: () => _textEditingController.clear(),
                 ),
               ),
               border: OutlineInputBorder(
@@ -61,12 +72,18 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
               ),
               hintStyle: TextStyle(fontSize: 18),
               hintText: 'Search a word...')),
+          suggestionsBoxDecoration: SuggestionsBoxDecoration(
+            borderRadius: BorderRadius.circular(18)
+          ),
           suggestionsCallback: (pattern) {
             return pattern.isEmpty ? null : getWordData();
           },
           itemBuilder: (context, suggestion) {
             return ListTile(
-              leading: Icon(Icons.beach_access),
+              leading: Icon(
+                Icons.input,
+                color: Colors.green,
+              ),
               title: Text(suggestion),
             );
           },
