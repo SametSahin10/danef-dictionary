@@ -10,35 +10,37 @@ class Archive extends StatefulWidget {
 }
 
 class _ArchiveState extends State<Archive> {
+  Future wordData;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    wordData = getWordData();
+
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Word>>(
       builder: (context, wordSnapshot) {
-        switch (wordSnapshot.connectionState) {
-          case ConnectionState.none:
-            return Icon(Icons.error);
-          case ConnectionState.waiting:
-          case ConnectionState.active:
-            return CircularProgressIndicator();
-          case ConnectionState.done:
-            if (wordSnapshot.hasError) {
-              return Icon(Icons.error);
-            } else {
-              return ListView.builder(
-                itemCount: wordSnapshot.data.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(wordSnapshot.data[index].adige)
-                  );
-                },
+        if (wordSnapshot.connectionState == ConnectionState.done) {
+          if (wordSnapshot.hasError) {
+            return Center(child: Icon(Icons.error));
+          }
+          return ListView.builder(
+            itemCount: wordSnapshot.data.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                  title: Text(wordSnapshot.data[index].adige)
               );
-            }
-            break;
-          default: return Icon(Icons.error);
+            },
+          );
+        } else {
+          return Center(child: CircularProgressIndicator());
         }
       },
-      future: getWordData(),
+      future: wordData,
     );
   }
 
@@ -46,9 +48,7 @@ class _ArchiveState extends State<Archive> {
     var words = await WordAPI().getWords();
     var wordMap = json.decode(words);
     var wordList = WordList();
-    setState(() {
-      wordList = WordList.fromJson(wordMap);
-    });
+    wordList = WordList.fromJson(wordMap);
     return wordList.words;
   }
 }
