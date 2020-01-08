@@ -30,7 +30,13 @@ class _ArchiveState extends State<Archive> {
             itemCount: wordSnapshot.data.length,
             itemBuilder: (context, index) {
               return ListTile(
-                  title: Text(wordSnapshot.data[index].adige)
+                  title: Text(
+                    wordSnapshot.data[index].adige,
+                    style: TextStyle(
+                      fontSize: 24
+                    ),
+                  ),
+                trailing: IconButton(icon: Icon(Icons.favorite_border)),
               );
             },
           );

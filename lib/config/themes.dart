@@ -5,6 +5,7 @@ lightTheme(context) {
     primarySwatch: Colors.green,
     primaryColor: Colors.green,
     accentColor: Colors.green,
+    fontFamily: 'JosefinSlab',
     scaffoldBackgroundColor: Colors.white,
     disabledColor: Colors.green,
     indicatorColor: Colors.green,
@@ -37,7 +38,7 @@ lightTheme(context) {
           width: 1
         )
       ),
-      hintStyle: TextStyle(fontSize: 18),
+      hintStyle: TextStyle(fontSize: 20),
     ),
     hintColor: Colors.green
   );

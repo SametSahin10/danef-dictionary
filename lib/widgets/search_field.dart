@@ -53,7 +53,6 @@ class _SearchFieldState extends State<SearchField> {
         return ListTile(
           leading: Icon(
             Icons.input,
-
           ),
           title: Text(suggestion),
         );
