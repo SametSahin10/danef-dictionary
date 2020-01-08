@@ -14,10 +14,8 @@ class _ArchiveState extends State<Archive> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     wordData = getWordData();
-
   }
 
   @override

@@ -39,31 +39,9 @@ class _SearchFieldState extends State<SearchField> {
             visible: widget.isClearIconVisible,
             child: IconButton(
               icon: Icon(Icons.cancel),
-              color: Colors.green,
-              disabledColor: Colors.green,
               onPressed: () => widget.textEditingController.clear(),
             ),
           ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(18)),
-            borderSide: BorderSide(
-                color: Colors.green
-            )
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(18)),
-            borderSide: BorderSide(
-                color: Colors.green
-            )
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(18)),
-            borderSide: BorderSide(
-                color: Colors.green,
-                width: 1.5
-            )
-          ),
-          hintStyle: TextStyle(fontSize: 18),
           hintText: 'Search a word...')),
       suggestionsBoxDecoration: SuggestionsBoxDecoration(
         borderRadius: BorderRadius.circular(18)
@@ -75,7 +53,7 @@ class _SearchFieldState extends State<SearchField> {
         return ListTile(
           leading: Icon(
             Icons.input,
-            color: Colors.green,
+
           ),
           title: Text(suggestion),
         );
