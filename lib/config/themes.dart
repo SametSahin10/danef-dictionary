@@ -5,7 +5,7 @@ lightTheme(context) {
     primarySwatch: Colors.green,
     primaryColor: Colors.green,
     accentColor: Colors.green,
-    fontFamily: 'JosefinSlab',
+    fontFamily: 'TextMeOne',
     scaffoldBackgroundColor: Colors.white,
     disabledColor: Colors.green,
     indicatorColor: Colors.green,

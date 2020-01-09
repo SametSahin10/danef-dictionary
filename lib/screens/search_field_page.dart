@@ -54,10 +54,15 @@ class _SearchFieldPageState extends State<SearchFieldPage>
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 12),
           child: Center(
-            child: SearchField(
-              textEditingController: _textEditingController,
-              focusNode: _focusNode,
-              isClearIconVisible: _isClearIconVisible,
+            child: Material(
+              shadowColor: Colors.green,
+              elevation: 2.5,
+              borderRadius: BorderRadius.circular(12),
+              child: SearchField(
+                textEditingController: _textEditingController,
+                focusNode: _focusNode,
+                isClearIconVisible: _isClearIconVisible,
+              ),
             ),
           ),
         ),

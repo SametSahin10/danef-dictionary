@@ -29,7 +29,8 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/fonts/
   fonts:
-    - family: JosefinSlab
+    - family: TextMeOne
       fonts:
-        - asset: assets/fonts/JosefinSlab-Regular.ttf
+        - asset: assets/fonts/TextMeOne-Regular.ttf
