@@ -12,33 +12,33 @@ lightTheme(context) {
     brightness: Brightness.light,
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(18)),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
               color: Colors.green
           )
       ),
       disabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(18)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           color: Colors.green,
           width: 1.5
         )
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(18)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
             color: Colors.green,
             width: 1.5
         )
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(18)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           color: Colors.green,
           width: 1
         )
       ),
-      hintStyle: TextStyle(fontSize: 20),
+      hintStyle: TextStyle(fontSize: 22),
     ),
     hintColor: Colors.green
   );
@@ -49,6 +49,7 @@ darkTheme(context) {
     primarySwatch: Colors.green,
     primaryColor: Colors.black,
     accentColor: Colors.green,
+    fontFamily: 'JosefinSlab',
     scaffoldBackgroundColor: Colors.black,
     appBarTheme: AppBarTheme(
         color: Colors.green
@@ -58,32 +59,32 @@ darkTheme(context) {
     brightness: Brightness.dark,
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(18)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
             color: Colors.green
         )
       ),
       disabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(18)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
             color: Colors.green
         )
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(18)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
             color: Colors.green,
             width: 1.5
         )
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(18)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
             color: Colors.green,
             width: 1
         )
       ),
-      hintStyle: TextStyle(fontSize: 18),
+      hintStyle: TextStyle(fontSize: 22),
     ),
     hintColor: Colors.green
   );

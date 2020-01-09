@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:danef_dictionary/api/word_api.dart';
-import 'package:danef_dictionary/models/word.dart';
 import 'package:danef_dictionary/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
@@ -10,25 +8,59 @@ class SearchFieldPage extends StatefulWidget {
   _SearchFieldPageState createState() => _SearchFieldPageState();
 }
 
-class _SearchFieldPageState extends State<SearchFieldPage> {
+class _SearchFieldPageState extends State<SearchFieldPage>
+                            with TickerProviderStateMixin {
   final _textEditingController = TextEditingController();
   bool _isClearIconVisible = false;
+
+  final FocusNode _focusNode = FocusNode();
+
+  AnimationController animationController;
+  Animation animation;
 
   @override
   void initState() {
     super.initState();
+    animationController = AnimationController(
+      duration: Duration(milliseconds: 600),
+      vsync: this)..addListener(() => setState(() {}));
+    animation = Tween(begin: 0.0, end: -250.0).chain(
+                  CurveTween(
+                    curve: Curves.fastOutSlowIn
+                  )
+                ).animate(animationController);
+    _focusNode.addListener(() {
+      print('Has focus: ${_focusNode.hasFocus}');
+      if (_focusNode.hasFocus) {
+        animationController.forward();
+      } else {
+        animationController.reverse();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focusNode.dispose();
+    animationController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        height: 60,
-        margin: EdgeInsets.only(left: 16.0, right: 16.0),
-        child: SearchField(
-          isClearIconVisible: _isClearIconVisible,
-          textEditingController: _textEditingController,
-        )
+      child: Transform.translate(
+        offset: Offset(0, animation.value),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          child: Center(
+            child: SearchField(
+              textEditingController: _textEditingController,
+              focusNode: _focusNode,
+              isClearIconVisible: _isClearIconVisible,
+            ),
+          ),
+        ),
       ),
     );
   }

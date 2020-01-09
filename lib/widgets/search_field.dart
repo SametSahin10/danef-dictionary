@@ -7,10 +7,13 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class SearchField extends StatefulWidget {
   TextEditingController textEditingController;
+  FocusNode focusNode;
   bool isClearIconVisible;
 
 
-  SearchField({this.textEditingController, this.isClearIconVisible});
+  SearchField({this.textEditingController,
+               this.focusNode,
+               this.isClearIconVisible});
 
   @override
   _SearchFieldState createState() => _SearchFieldState();
@@ -22,6 +25,7 @@ class _SearchFieldState extends State<SearchField> {
     return TypeAheadField(
       textFieldConfiguration: TextFieldConfiguration(
         controller: widget.textEditingController,
+        focusNode: widget.focusNode,
         onChanged: (newValue) {
           setState(() {
             if (newValue.length == 0) {
