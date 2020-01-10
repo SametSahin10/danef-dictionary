@@ -2,6 +2,7 @@ import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/screens/archive.dart';
 import 'package:danef_dictionary/screens/favorite_words.dart';
 import 'package:danef_dictionary/screens/search_field_page.dart';
+import 'package:danef_dictionary/screens/settings.dart';
 import 'package:danef_dictionary/widgets/theme_inherited_widget.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
@@ -24,18 +25,28 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Danef Dictionary'),
         actions: <Widget>[
           IconButton(
-            icon: ThemeSwitcher.of(context)
-                  .isDarkModeOn ?
-                    Icon(Icons.wb_sunny) :
-                    Image.asset(Assets.moon,
-                      height: 20,
-                      width: 20,
-                      color: Colors.white),
-            onPressed: () => ThemeSwitcher.of(context).switchDarkMode(),
-          )
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Settings())
+              );
+            }
+          ),
+//          IconButton(
+//            icon: ThemeSwitcher.of(context)
+//                  .isDarkModeOn ?
+//                    Icon(Icons.wb_sunny) :
+//                    Image.asset(Assets.moon,
+//                      height: 20,
+//                      width: 20,
+//                      color: Colors.white),
+//            onPressed: () => ThemeSwitcher.of(context).switchDarkMode(),
+//          )
         ],
       ),
       body: tabs[_currentIndex],

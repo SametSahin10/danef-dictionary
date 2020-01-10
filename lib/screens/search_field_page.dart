@@ -22,7 +22,7 @@ class _SearchFieldPageState extends State<SearchFieldPage>
   void initState() {
     super.initState();
     animationController = AnimationController(
-      duration: Duration(milliseconds: 600),
+      duration: Duration(milliseconds: 500),
       vsync: this)..addListener(() => setState(() {}));
     animation = Tween(begin: 0.0, end: -250.0).chain(
                   CurveTween(

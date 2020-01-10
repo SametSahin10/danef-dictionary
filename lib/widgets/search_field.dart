@@ -36,7 +36,7 @@ class _SearchFieldState extends State<SearchField> {
           });
         },
         textAlign: TextAlign.center,
-        style: DefaultTextStyle.of(context).style.copyWith(fontSize: 18),
+        style: DefaultTextStyle.of(context).style.copyWith(fontSize: 20),
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.search),
           suffixIcon: Visibility(

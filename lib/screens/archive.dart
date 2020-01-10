@@ -33,10 +33,14 @@ class _ArchiveState extends State<Archive> {
                   title: Text(
                     wordSnapshot.data[index].adige,
                     style: TextStyle(
-                      fontSize: 24
+                      fontSize: 24,
+                      fontFamily: 'Roboto'
                     ),
                   ),
-                trailing: IconButton(icon: Icon(Icons.favorite_border)),
+                trailing: IconButton(
+                  icon: Icon(Icons.favorite_border),
+                  disabledColor: Colors.green,
+                ),
               );
             },
           );

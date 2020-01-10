@@ -7,9 +7,28 @@ lightTheme(context) {
     accentColor: Colors.green,
     fontFamily: 'TextMeOne',
     scaffoldBackgroundColor: Colors.white,
-    disabledColor: Colors.green,
+    disabledColor: Colors.white,
     indicatorColor: Colors.green,
     brightness: Brightness.light,
+    appBarTheme: AppBarTheme(
+      actionsIconTheme: IconThemeData(
+        color: Colors.white,
+      ),
+      textTheme: TextTheme(
+        title: TextStyle(
+          fontSize: 24,
+          fontFamily: 'TextMeOne'
+        ),
+      ),
+    ),
+    textTheme: TextTheme(
+      title: TextStyle(
+        fontSize: 24
+      ),
+      body1: TextStyle(
+        fontSize: 16
+      ),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -38,7 +57,9 @@ lightTheme(context) {
           width: 1
         )
       ),
-      hintStyle: TextStyle(fontSize: 22),
+      hintStyle: TextStyle(
+        fontSize: 20,
+      ),
     ),
     hintColor: Colors.green
   );
@@ -49,14 +70,27 @@ darkTheme(context) {
     primarySwatch: Colors.green,
     primaryColor: Colors.black,
     accentColor: Colors.green,
-    fontFamily: 'JosefinSlab',
+    fontFamily: 'TextMeOne',
     scaffoldBackgroundColor: Colors.black,
-    appBarTheme: AppBarTheme(
-        color: Colors.green
-    ),
     disabledColor: Colors.green,
     indicatorColor: Colors.green,
     brightness: Brightness.dark,
+      appBarTheme: AppBarTheme(
+        textTheme: TextTheme(
+          title: TextStyle(
+            fontSize: 24,
+            fontFamily: 'TextMeOne'
+          ),
+        ),
+      ),
+      textTheme: TextTheme(
+        title: TextStyle(
+            fontSize: 24
+        ),
+        body1: TextStyle(
+            fontSize: 16
+        ),
+      ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -84,7 +118,7 @@ darkTheme(context) {
             width: 1
         )
       ),
-      hintStyle: TextStyle(fontSize: 22),
+      hintStyle: TextStyle(fontSize: 20),
     ),
     hintColor: Colors.green
   );
