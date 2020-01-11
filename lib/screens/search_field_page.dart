@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:danef_dictionary/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
