@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:danef_dictionary/widgets/search_field.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +21,7 @@ class _SearchFieldPageState extends State<SearchFieldPage>
   void initState() {
     super.initState();
     animationController = AnimationController(
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 400),
       vsync: this)..addListener(() => setState(() {}));
     animation = Tween(begin: 0.0, end: -250.0).chain(
                   CurveTween(
