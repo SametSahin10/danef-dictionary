@@ -28,9 +28,9 @@ class _ArchiveState extends State<Archive> {
     return FutureBuilder<List<List<Word>>>(
       future: Future.wait([wordData, favoriteWords]),
       builder: (context, wordSnapshot) {
-        var words = wordSnapshot.data[0];
-        var favoriteWords = wordSnapshot.data[1];
         if (wordSnapshot.connectionState == ConnectionState.done) {
+          var words = wordSnapshot.data[0];
+          var favoriteWords = wordSnapshot.data[1];
           if (wordSnapshot.hasError) {
             return Center(child: Icon(Icons.error));
           }
