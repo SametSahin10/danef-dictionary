@@ -7,11 +7,15 @@ part of 'word.dart';
 // **************************************************************************
 
 Word _$WordFromJson(Map<String, dynamic> json) {
-  return Word(json['adige'] as String, json['turkish'] as String);
+  return Word(
+      json['id'] as int, json['adige'] as String, json['turkish'] as String);
 }
 
-Map<String, dynamic> _$WordToJson(Word instance) =>
-    <String, dynamic>{'adige': instance.adige, 'turkish': instance.turkish};
+Map<String, dynamic> _$WordToJson(Word instance) => <String, dynamic>{
+      'id': instance.wordId,
+      'adige': instance.adige,
+      'turkish': instance.turkish
+    };
 
 WordList _$WordListFromJson(Map<String, dynamic> json) {
   return WordList(

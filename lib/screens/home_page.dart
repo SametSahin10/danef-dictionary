@@ -1,9 +1,7 @@
-import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/screens/archive.dart';
 import 'package:danef_dictionary/screens/favorite_words.dart';
 import 'package:danef_dictionary/screens/search_field_page.dart';
 import 'package:danef_dictionary/screens/settings.dart';
-import 'package:danef_dictionary/widgets/theme_inherited_widget.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 
