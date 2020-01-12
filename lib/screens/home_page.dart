@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: tabs[_currentIndex],
       bottomNavigationBar: FancyBottomNavigation(
-        barHeight: 65,
+        barHeight: 70,
         arcHeight: 65,
         circleHeight: 50,
         initialSelection: 1,
