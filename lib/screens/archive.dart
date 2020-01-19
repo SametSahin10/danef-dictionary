@@ -54,7 +54,7 @@ class _ArchiveState extends State<Archive> {
         word.adige,
         style: TextStyle(
           fontSize: 20,
-          fontFamily: 'Roboto'
+          fontFamily: 'OpenSans'
         ),
       ),
       trailing: IconButton(

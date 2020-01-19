@@ -36,3 +36,6 @@ flutter:
     - family: TextMeOne
       fonts:
         - asset: assets/fonts/TextMeOne-Regular.ttf
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Light.ttf
