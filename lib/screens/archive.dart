@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:danef_dictionary/api/word_api.dart';
 import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
+import 'package:danef_dictionary/widgets/word_tile.dart';
 import 'package:flutter/material.dart';
 
 class Archive extends StatefulWidget {
@@ -38,7 +39,9 @@ class _ArchiveState extends State<Archive> {
             padding: EdgeInsets.all(8),
             itemCount: words.length,
             itemBuilder: (context, index) {
-              return _buildRow(words[index], favoriteWords);
+              return _isInFavorites(favoriteWords, words[index]) ?
+                         WordTile(words[index], isFavourite: true) :
+                         WordTile(words[index], isFavourite: false);
             }
           );
         } else {
