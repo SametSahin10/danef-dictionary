@@ -35,16 +35,6 @@ class _HomePageState extends State<HomePage> {
               );
             }
           ),
-//          IconButton(
-//            icon: ThemeSwitcher.of(context)
-//                  .isDarkModeOn ?
-//                    Icon(Icons.wb_sunny) :
-//                    Image.asset(Assets.moon,
-//                      height: 20,
-//                      width: 20,
-//                      color: Colors.white),
-//            onPressed: () => ThemeSwitcher.of(context).switchDarkMode(),
-//          )
         ],
       ),
       body: tabs[_currentIndex],
