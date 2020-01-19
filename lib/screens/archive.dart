@@ -38,29 +38,39 @@ class _ArchiveState extends State<Archive> {
             padding: EdgeInsets.all(8),
             itemCount: words.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                  title: Text(
-                    words[index].adige,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Roboto'
-                    ),
-                  ),
-                trailing: IconButton(
-                  icon: _isInFavorites(favoriteWords, words[index]) ?
-                          Icon(Icons.favorite, color: Colors.green) :
-                          Icon(Icons.favorite_border, color: Colors.green),
-                  onPressed: () => _isInFavorites(favoriteWords, words[index]) ?
-                          _deleteFromFavorites(words[index]) :
-                          _addWordToFavorites(words[index])
-                ),
-              );
-            },
+              return _buildRow(words[index], favoriteWords);
+            }
           );
         } else {
           return Center(child: CircularProgressIndicator());
         }
       },
+    );
+  }
+
+  Widget _buildRow(Word word, List<Word> favoriteWords) {
+    return ListTile(
+      title: Text(
+        word.adige,
+        style: TextStyle(
+          fontSize: 20,
+          fontFamily: 'Roboto'
+        ),
+      ),
+      trailing: IconButton(
+        icon: _isInFavorites(favoriteWords, word) ?
+            Icon(Icons.favorite, color: Colors.green) :
+            Icon(Icons.favorite_border, color: Colors.green),
+        onPressed: () {
+          setState(() {
+            if (_isInFavorites(favoriteWords, word)) {
+              _deleteFromFavorites(word);
+            } else {
+              _addWordToFavorites(word);
+            }
+          });
+        }
+      ),
     );
   }
 
@@ -75,13 +85,11 @@ class _ArchiveState extends State<Archive> {
   _addWordToFavorites(Word word) {
     print('Adding ${word.adige} to favorites');
     wordDatabase.addWord(word);
-    setState(() {});
   }
 
   _deleteFromFavorites(Word word) {
     print('Deleting ${word.adige} from favorites');
     wordDatabase.deleteWord(word.wordId);
-    setState(() {});
   }
 
    _isInFavorites(List<Word> words, Word word) {
