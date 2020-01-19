@@ -20,24 +20,31 @@ class _FavoriteWordsState extends State<FavoriteWords> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Word>>(
+      future: words,
       builder: (context, wordSnapshot) {
         if (wordSnapshot.connectionState == ConnectionState.done) {
+          var words = wordSnapshot.data;
           if (wordSnapshot.hasError) {
             return Center(child: Icon(Icons.error));
           } else {
             if (wordSnapshot.data == null) {
-              return Center(child: Text('Add some words favorites'));
+              return Center(
+                child: Text(
+                  'Add some words favorites',
+                  style: TextStyle(fontSize: 24),
+                )
+              );
             }
             return ListView.builder(
               padding: EdgeInsets.all(8),
-              itemCount: wordSnapshot.data.length,
+              itemCount: words.length,
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(
-                    wordSnapshot.data[index].adige,
+                    words[index].adige,
                     style: TextStyle(
                       fontSize: 20,
-                      fontFamily: 'Roboto'
+                      fontFamily: 'OpenSans'
                     ),
                   ),
                   trailing: IconButton(
@@ -51,7 +58,6 @@ class _FavoriteWordsState extends State<FavoriteWords> {
           return Center(child: CircularProgressIndicator());
         }
       },
-      future: words,
     );
   }
 }
