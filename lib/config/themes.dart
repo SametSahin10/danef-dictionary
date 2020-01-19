@@ -76,6 +76,7 @@ darkTheme(context) {
     indicatorColor: Colors.green,
     brightness: Brightness.dark,
       appBarTheme: AppBarTheme(
+        color: Colors.green,
         textTheme: TextTheme(
           title: TextStyle(
             fontSize: 24,
@@ -92,34 +93,36 @@ darkTheme(context) {
         ),
       ),
     inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.green,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
-            color: Colors.green
+            color: Colors.white
         )
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
-            color: Colors.green
+            color: Colors.white
         )
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
-            color: Colors.green,
-            width: 1.5
+            color: Colors.white,
+            width: 1
         )
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
-            color: Colors.green,
-            width: 1
+            color: Colors.white,
+            width: 0.5
         )
       ),
       hintStyle: TextStyle(fontSize: 20),
     ),
-    hintColor: Colors.green
+    hintColor: Colors.white
   );
 }

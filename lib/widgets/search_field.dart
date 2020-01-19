@@ -58,7 +58,10 @@ class _SearchFieldState extends State<SearchField> {
           leading: Icon(
             Icons.input,
           ),
-          title: Text(suggestion),
+          title: Text(
+            suggestion,
+            style: TextStyle(fontFamily: 'OpenSans'),
+          ),
         );
       },
       onSuggestionSelected: (suggestion) {
