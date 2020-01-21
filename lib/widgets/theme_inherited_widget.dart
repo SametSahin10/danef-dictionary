@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeSwitcher extends InheritedWidget {
   final _ThemeSwitcherWidgetState data;
@@ -38,10 +39,12 @@ class ThemeSwitcherWidget extends StatefulWidget {
 class _ThemeSwitcherWidgetState extends State<ThemeSwitcherWidget> {
   bool isDarkModeOn;
 
-  void switchDarkMode() {
+  void switchDarkMode() async {
     setState(() {
       isDarkModeOn = !isDarkModeOn;
     });
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setBool('isDarkModeOn', isDarkModeOn);
   }
 
   @override
