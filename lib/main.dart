@@ -49,5 +49,6 @@ class DanefDictionary extends StatelessWidget {
 
 Future<bool> _determineAppTheme() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
+  bool isDarkModeOn = (preferences.getBool('isDarkModeOn') ?? false);
   return isDarkModeOn;
 }
