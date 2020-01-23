@@ -26,8 +26,8 @@ class _WordTileState extends State<WordTile> {
       ),
       trailing: IconButton(
           icon: widget.isFavourite ?
-          Icon(Icons.favorite, color: Colors.green) :
-          Icon(Icons.favorite_border, color: Colors.green),
+          Icon(Icons.favorite, color: Colors.green, size: 28) :
+          Icon(Icons.favorite_border, color: Colors.green, size: 28),
           onPressed: () {
             setState(() {
               if (widget.isFavourite) {
