@@ -1,6 +1,7 @@
 import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lottie/flutter_lottie.dart';
 
 class FavoriteWords extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class FavoriteWords extends StatefulWidget {
 
 class _FavoriteWordsState extends State<FavoriteWords> {
   Future words;
+  String _animationFilePath = 'assets/animations/sleeping_cat.json';
 
   @override
   void initState() {
@@ -29,10 +31,11 @@ class _FavoriteWordsState extends State<FavoriteWords> {
           } else {
             if (wordSnapshot.data == null) {
               return Center(
-                child: Text(
-                  'Add some words favorites',
-                  style: TextStyle(fontSize: 24),
-                )
+                child: LottieView.fromFile(
+                  autoPlay: true,
+                  loop: true,
+                  onViewCreated: null,
+                  filePath: _animationFilePath),
               );
             }
             return ListView.builder(
