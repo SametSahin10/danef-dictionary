@@ -9,17 +9,22 @@ class SearchField extends StatefulWidget {
   TextEditingController textEditingController;
   FocusNode focusNode;
   bool isClearIconVisible;
-
+  Function changeMeaningVisibility;
+  Function setWordAndMeaning;
 
   SearchField({this.textEditingController,
                this.focusNode,
-               this.isClearIconVisible});
+               this.isClearIconVisible,
+               this.changeMeaningVisibility,
+               this.setWordAndMeaning});
 
   @override
   _SearchFieldState createState() => _SearchFieldState();
 }
 
 class _SearchFieldState extends State<SearchField> {
+  List<Word> words;
+
   @override
   Widget build(BuildContext context) {
     return TypeAheadField(
@@ -51,8 +56,9 @@ class _SearchFieldState extends State<SearchField> {
         borderRadius: BorderRadius.circular(18)
       ),
       suggestionsCallback: (pattern) {
-        return pattern.isEmpty ? null : getWordData();
+        return pattern.isEmpty ? null : getWordData(pattern);
       },
+      keepSuggestionsOnLoading: false,
       itemBuilder: (context, suggestion) {
         return ListTile(
           leading: Icon(
@@ -60,27 +66,48 @@ class _SearchFieldState extends State<SearchField> {
           ),
           title: Text(
             suggestion,
-            style: TextStyle(fontFamily: 'OpenSans'),
+            style: TextStyle(
+              fontSize: 18,
+              fontFamily: 'OpenSans'
+            ),
           ),
         );
       },
       onSuggestionSelected: (suggestion) {
         print(suggestion);
+        widget.setWordAndMeaning(suggestion, getMeaning(suggestion));
+        widget.changeMeaningVisibility();
       },
     );
   }
 
-  Future<List<String>> getWordData() async {
+  Future<List<String>> getWordData(String pattern) async {
     var result = await WordAPI().getWords();
     var wordMap = json.decode(result);
     print('wordMap: $wordMap');
     WordList wordList = WordList.fromJson(wordMap);
     List<String> wordsAsStrings = new List();
-    List<Word> words = wordList.words;
+    words = wordList.words;
     for (final word in words) {
-      wordsAsStrings.add(word.adige);
-      wordsAsStrings.add(word.turkish);
+      if (word.adige.contains(pattern)) {
+        wordsAsStrings.add(word.adige);
+      }
+      if (word.turkish.contains(pattern)) {
+        wordsAsStrings.add(word.turkish);
+      }
     }
     return wordsAsStrings;
+  }
+
+  getMeaning(String word) {
+    for (final element in words) {
+      if (element.adige == word) {
+        return element.turkish;
+      }
+      if (element.turkish == word) {
+        return element.adige;
+      }
+    }
+    return "Could not find meaning";
   }
 }
