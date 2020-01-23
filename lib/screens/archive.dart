@@ -5,6 +5,7 @@ import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
 import 'package:danef_dictionary/widgets/word_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lottie/flutter_lottie.dart';
 
 class Archive extends StatefulWidget {
   @override
@@ -15,6 +16,8 @@ class _ArchiveState extends State<Archive> {
   Future<List<Word>> wordData;
   WordDatabase wordDatabase;
   Future<List<Word>> favoriteWords;
+
+  String _animationFilePath = 'assets/animations/loading_word_list.json';
 
   @override
   void initState() {
@@ -45,35 +48,16 @@ class _ArchiveState extends State<Archive> {
             }
           );
         } else {
-          return Center(child: CircularProgressIndicator());
+          return Center(
+            child: LottieView.fromFile(
+              autoPlay: true,
+              loop: true,
+              onViewCreated: null,
+              filePath: _animationFilePath
+            )
+          );
         }
       },
-    );
-  }
-
-  Widget _buildRow(Word word, List<Word> favoriteWords) {
-    return ListTile(
-      title: Text(
-        word.adige,
-        style: TextStyle(
-          fontSize: 20,
-          fontFamily: 'OpenSans'
-        ),
-      ),
-      trailing: IconButton(
-        icon: _isInFavorites(favoriteWords, word) ?
-            Icon(Icons.favorite, color: Colors.green) :
-            Icon(Icons.favorite_border, color: Colors.green),
-        onPressed: () {
-          setState(() {
-            if (_isInFavorites(favoriteWords, word)) {
-              _deleteFromFavorites(word);
-            } else {
-              _addWordToFavorites(word);
-            }
-          });
-        }
-      ),
     );
   }
 
@@ -83,16 +67,6 @@ class _ArchiveState extends State<Archive> {
     var wordList = WordList();
     wordList = WordList.fromJson(wordMap);
     return wordList.words;
-  }
-
-  _addWordToFavorites(Word word) {
-    print('Adding ${word.adige} to favorites');
-    wordDatabase.addWord(word);
-  }
-
-  _deleteFromFavorites(Word word) {
-    print('Deleting ${word.adige} from favorites');
-    wordDatabase.deleteWord(word.wordId);
   }
 
    _isInFavorites(List<Word> words, Word word) {

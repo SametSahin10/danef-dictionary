@@ -31,11 +31,15 @@ class _FavoriteWordsState extends State<FavoriteWords> {
           } else {
             if (wordSnapshot.data == null) {
               return Center(
-                child: LottieView.fromFile(
-                  autoPlay: true,
-                  loop: true,
-                  onViewCreated: null,
-                  filePath: _animationFilePath),
+                child: Container(
+                  width: 300,
+                  height: 300,
+                  child: LottieView.fromFile(
+                    autoPlay: true,
+                    loop: true,
+                    onViewCreated: null,
+                    filePath: _animationFilePath),
+                ),
               );
             }
             return ListView.builder(
