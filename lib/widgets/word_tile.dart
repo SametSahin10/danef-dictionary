@@ -6,7 +6,6 @@ class WordTile extends StatefulWidget {
   Word word;
   bool isFavourite;
 
-
   WordTile(this.word, {this.isFavourite});
 
   @override

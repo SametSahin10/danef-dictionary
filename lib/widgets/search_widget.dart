@@ -9,13 +9,15 @@ class SearchField extends StatefulWidget {
   TextEditingController textEditingController;
   FocusNode focusNode;
   bool isClearIconVisible;
-  Function changeMeaningVisibility;
+  Function clearMeaning;
+  Function showMeaning;
   Function setWordAndMeaning;
 
   SearchField({this.textEditingController,
                this.focusNode,
                this.isClearIconVisible,
-               this.changeMeaningVisibility,
+               this.clearMeaning,
+               this.showMeaning,
                this.setWordAndMeaning});
 
   @override
@@ -74,9 +76,9 @@ class _SearchFieldState extends State<SearchField> {
         );
       },
       onSuggestionSelected: (suggestion) {
-        print(suggestion);
         widget.setWordAndMeaning(suggestion, getMeaning(suggestion));
-        widget.changeMeaningVisibility();
+        widget.clearMeaning();
+        widget.showMeaning();
       },
     );
   }

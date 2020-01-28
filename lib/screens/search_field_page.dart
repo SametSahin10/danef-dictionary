@@ -12,13 +12,14 @@ class _SearchFieldPageState extends State<SearchFieldPage>
   final _textEditingController = TextEditingController();
   bool _isClearIconVisible = false;
   bool _isMeaningVisible = false;
+  bool _isSearchAgainVisible = false;
 
   final FocusNode _focusNode = FocusNode();
 
   AnimationController searchFieldAnimController;
-  AnimationController meaningAnimationController;
+  AnimationController meaningAnimFromRightController;
   Animation searchFieldAnimation;
-  Animation meaningAnimation;
+  Animation meaningAnimFromRight;
 
   String _word = "Word";
   String _meaning = "Meaning";
@@ -41,14 +42,14 @@ class _SearchFieldPageState extends State<SearchFieldPage>
       }
     });
 
-    meaningAnimationController = AnimationController(
+    meaningAnimFromRightController = AnimationController(
       duration: Duration(milliseconds: 700),
       vsync: this)..addListener(() => setState(() {}));
-    meaningAnimation = Tween(begin: 400.0, end: 0.0).chain(
+    meaningAnimFromRight = Tween(begin: 400.0, end: 0.0).chain(
               CurveTween(
                 curve: Curves.fastLinearToSlowEaseIn
               )
-            ).animate(meaningAnimationController);
+            ).animate(meaningAnimFromRightController);
   }
 
   @override
@@ -56,18 +57,22 @@ class _SearchFieldPageState extends State<SearchFieldPage>
     super.dispose();
     _focusNode.dispose();
     searchFieldAnimController.dispose();
-    meaningAnimationController.dispose();
+    meaningAnimFromRightController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Center(
-            child: Transform.translate(
-              offset: Offset(meaningAnimation.value, 0),
-              child: Meaning(word: _word, meaning: _meaning),
-            )
+        AnimatedOpacity(
+          opacity: _isMeaningVisible ? 1.0 : 0.0,
+          duration: Duration(milliseconds: 700),
+          child: Center(
+              child: Transform.translate(
+                offset: Offset(meaningAnimFromRight.value, 0),
+                child: Meaning(word: _word, meaning: _meaning),
+              )
+          ),
         ),
         Center(
           child: Transform.translate(
@@ -83,7 +88,8 @@ class _SearchFieldPageState extends State<SearchFieldPage>
                     textEditingController: _textEditingController,
                     focusNode: _focusNode,
                     isClearIconVisible: _isClearIconVisible,
-                    changeMeaningVisibility: _showMeaning,
+                    clearMeaning: _clearMeaning,
+                    showMeaning: _showMeaning,
                     setWordAndMeaning: _setWordAndMeaning,
                   ),
                 ),
@@ -91,29 +97,33 @@ class _SearchFieldPageState extends State<SearchFieldPage>
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: FlatButton.icon(
-              padding: EdgeInsets.all(10),
-              icon: Icon(
-                Icons.search,
-                color: Colors.green,
-              ),
-              label: Text(
-                'Search again',
-                style: TextStyle(fontSize: 18),
-              ),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
+        AnimatedOpacity(
+          opacity: _isSearchAgainVisible ? 1.0 : 0.0,
+          duration: Duration(milliseconds: 1000),
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: FlatButton.icon(
+                padding: EdgeInsets.all(10),
+                icon: Icon(
+                  Icons.search,
                   color: Colors.green,
-                  width: 0.8
                 ),
-                borderRadius: BorderRadius.circular(12)
+                label: Text(
+                  'Search again',
+                  style: TextStyle(fontSize: 18),
+                ),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Colors.green,
+                    width: 0.8
+                  ),
+                  borderRadius: BorderRadius.circular(12)
+                ),
+                textColor: Colors.green,
+                onPressed: _focusOnSearchField
               ),
-              textColor: Colors.green,
-              onPressed: _focusOnSearchField
             ),
           ),
         )
@@ -121,16 +131,27 @@ class _SearchFieldPageState extends State<SearchFieldPage>
     );
   }
 
-  _showMeaning() {
-    meaningAnimationController.forward();
+  _clearMeaning() {
+    if (_isMeaningVisible) {
+      print('fading out meaning');
+      _isMeaningVisible = false;
+    }
   }
 
-  _clearEnvironment() {
-    _focusNode.unfocus();
-    _textEditingController.clear();
-    meaningAnimationController.reverse();
-    searchFieldAnimController.reverse();
+  _showMeaning() {
+    meaningAnimFromRightController.forward();
+    setState(() {
+      _isMeaningVisible = true;
+      _isSearchAgainVisible = true;
+    });
   }
+
+//  _clearEnvironment() {
+//    _focusNode.unfocus();
+//    _textEditingController.clear();
+//    meaningAnimationController.reverse();
+//    searchFieldAnimController.reverse();
+//  }
 
   _setWordAndMeaning(String word, String meaning) {
     setState(() {
