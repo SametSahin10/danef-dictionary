@@ -20,6 +20,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSizes.height = MediaQuery.of(context).size.height;
+    ScreenSizes.padding = MediaQuery.of(context).padding;
+    ScreenSizes.devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -56,4 +59,10 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+class ScreenSizes {
+  static double height;
+  static var padding;
+  static double devicePixelRatio;
 }

@@ -1,3 +1,5 @@
+import 'package:danef_dictionary/main.dart';
+import 'package:danef_dictionary/screens/home_page.dart';
 import 'package:danef_dictionary/widgets/meaning_widget.dart';
 import 'package:danef_dictionary/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,16 +29,21 @@ class _SearchFieldPageState extends State<SearchFieldPage>
   @override
   void initState() {
     super.initState();
+    var actualHeight = _getActualHeight();
+    print('Actual height: $actualHeight');
+    print('device pixel ratio: ${ScreenSizes.devicePixelRatio}');
+    var animationEnd = (-actualHeight / 2)
+                          + (25 * ScreenSizes.devicePixelRatio);
+    print('animation end: $animationEnd');
     searchFieldAnimController = AnimationController(
       duration: Duration(milliseconds: 400),
       vsync: this)..addListener(() => setState(() {}));
-    searchFieldAnimation = Tween(begin: 0.0, end: -250.0).chain(
+    searchFieldAnimation = Tween(begin: 0.0, end: animationEnd).chain(
                   CurveTween(
                     curve: Curves.fastOutSlowIn
                   )
                 ).animate(searchFieldAnimController);
     _focusNode.addListener(() {
-      print('Has focus: ${_focusNode.hasFocus}');
       if (_focusNode.hasFocus) {
         searchFieldAnimController.forward();
       }
@@ -162,5 +169,17 @@ class _SearchFieldPageState extends State<SearchFieldPage>
 
   _focusOnSearchField() {
     FocusScope.of(context).requestFocus(_focusNode);
+  }
+
+  double _getActualHeight() {
+    // Subtracts padding and toolbar height and returns the actual height
+    // left for widgets to reside.
+    var rawHeight = ScreenSizes.height;
+    var padding = ScreenSizes.padding;
+    var actualHeight = rawHeight
+                        - padding.top
+                        - padding.bottom
+                        - kToolbarHeight;
+    return actualHeight;
   }
 }
