@@ -30,11 +30,8 @@ class _SearchFieldPageState extends State<SearchFieldPage>
   void initState() {
     super.initState();
     var actualHeight = _getActualHeight();
-    print('Actual height: $actualHeight');
-    print('device pixel ratio: ${ScreenSizes.devicePixelRatio}');
     var animationEnd = (-actualHeight / 2)
                           + (25 * ScreenSizes.devicePixelRatio);
-    print('animation end: $animationEnd');
     searchFieldAnimController = AnimationController(
       duration: Duration(milliseconds: 400),
       vsync: this)..addListener(() => setState(() {}));
