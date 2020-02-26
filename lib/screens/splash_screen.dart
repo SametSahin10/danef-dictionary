@@ -29,12 +29,15 @@ class _SplashScreenState extends State<SplashScreen> {
           children: <Widget>[
             Flexible(
               flex: 1,
-              child: Text(
-                'ADDER',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontFamily: 'OpenSans',
-                  color: Colors.white
+              child: Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: Text(
+                  'ADDER',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontFamily: 'OpenSans',
+                    color: Colors.white
+                  ),
                 ),
               ),
             ),
@@ -44,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Text(
                   'Danef Dictionary',
                   style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 36,
                     color: Colors.white
                   ),
                 ),
@@ -55,12 +58,15 @@ class _SplashScreenState extends State<SplashScreen> {
               child: AnimatedOpacity(
                 opacity: _isSponsorTextVisible ? 1.0 : 0.0,
                 duration: Duration(seconds: 2),
-                child: Text(
-                  'Sponsored by: Mehdi Çetinbaş',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontFamily: 'OpenSans',
-                    color: Colors.white
+                child: Center(
+                  child: Text(
+                    'Sponsored by\nMehdi Çetinbaş',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontFamily: 'OpenSans',
+                      color: Colors.white
+                    ),
                   ),
                 ),
               ),

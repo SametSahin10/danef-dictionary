@@ -2,7 +2,6 @@ import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lottie/flutter_lottie.dart';
 import 'package:fluttie/fluttie.dart';
 
 class FavoriteWords extends StatefulWidget {

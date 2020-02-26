@@ -6,7 +6,6 @@ import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
 import 'package:danef_dictionary/widgets/word_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lottie/flutter_lottie.dart';
 import 'package:fluttie/fluttie.dart';
 
 class Archive extends StatefulWidget {
