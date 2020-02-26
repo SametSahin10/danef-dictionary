@@ -43,18 +43,9 @@ flutter:
     - assets/fonts/
     - assets/animations/
   fonts:
-    - family: TextMeOne
-      fonts:
-        - asset: assets/fonts/TextMeOne-Regular.ttf
     - family: OpenSans
       fonts:
         - asset: assets/fonts/OpenSans-Light.ttf
-    - family: NotoSans
-      fonts:
-          - asset: assets/fonts/NotoSans-Regular.ttf
     - family: DidactGothic
       fonts:
-          - asset: assets/fonts/DidactGothic-Regular.ttf
-    - family: NewsCycle
-      fonts:
-          - asset: assets/fonts/NewsCycle-Regular.ttf
+        - asset: assets/fonts/DidactGothic-Regular.ttf
