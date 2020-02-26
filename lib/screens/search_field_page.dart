@@ -1,4 +1,3 @@
-import 'package:danef_dictionary/main.dart';
 import 'package:danef_dictionary/screens/home_page.dart';
 import 'package:danef_dictionary/widgets/meaning_widget.dart';
 import 'package:danef_dictionary/widgets/search_widget.dart';
@@ -30,8 +29,7 @@ class _SearchFieldPageState extends State<SearchFieldPage>
   void initState() {
     super.initState();
     var actualHeight = _getActualHeight();
-    var animationEnd = (-actualHeight / 2)
-                          + (25 * ScreenSizes.devicePixelRatio);
+    var animationEnd = -actualHeight * 0.375;
     searchFieldAnimController = AnimationController(
       duration: Duration(milliseconds: 400),
       vsync: this)..addListener(() => setState(() {}));

@@ -38,7 +38,7 @@ class _FavoriteWordsState extends State<FavoriteWords> {
                 child: _animationReady ?
                           FluttieAnimation(
                             _sleepingCatAnim,
-                            size: Size(300, 250),
+                            size: Size(300, 220),
                           ) :
                           Container()
               );
