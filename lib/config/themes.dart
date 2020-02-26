@@ -5,7 +5,7 @@ lightTheme(context) {
     primarySwatch: Colors.green,
     primaryColor: Colors.green,
     accentColor: Colors.green,
-    fontFamily: 'TextMeOne',
+    fontFamily: 'DidactGothic',
     scaffoldBackgroundColor: Colors.white,
     disabledColor: Colors.white,
     indicatorColor: Colors.green,
@@ -17,7 +17,6 @@ lightTheme(context) {
       textTheme: TextTheme(
         title: TextStyle(
           fontSize: 24,
-          fontFamily: 'TextMeOne'
         ),
       ),
     ),
@@ -70,7 +69,7 @@ darkTheme(context) {
     primarySwatch: Colors.green,
     primaryColor: Colors.black,
     accentColor: Colors.green,
-    fontFamily: 'TextMeOne',
+    fontFamily: 'DidactGothic',
     scaffoldBackgroundColor: Colors.black,
     disabledColor: Colors.green,
     indicatorColor: Colors.green,
@@ -80,7 +79,6 @@ darkTheme(context) {
         textTheme: TextTheme(
           title: TextStyle(
             fontSize: 24,
-            fontFamily: 'TextMeOne'
           ),
         ),
       ),

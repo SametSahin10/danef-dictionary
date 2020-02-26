@@ -20,7 +20,6 @@ class _WordTileState extends State<WordTile> {
         widget.word.adige,
         style: TextStyle(
             fontSize: 20,
-            fontFamily: 'OpenSans'
         ),
       ),
       trailing: IconButton(

@@ -70,7 +70,6 @@ class _SearchFieldState extends State<SearchField> {
             suggestion,
             style: TextStyle(
               fontSize: 18,
-              fontFamily: 'OpenSans'
             ),
           ),
         );

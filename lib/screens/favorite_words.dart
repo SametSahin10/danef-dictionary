@@ -79,7 +79,7 @@ Widget _buildFavouriteWords(List<Word> words) {
         return ListTile(
           title: Text(
             words[index].adige,
-            style: TextStyle(fontSize: 20, fontFamily: 'OpenSans'),
+            style: TextStyle(fontSize: 20, fontFamily: 'DidactGothic'),
           ),
           trailing: IconButton(
             icon: Icon(Icons.favorite),
