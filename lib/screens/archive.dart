@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:danef_dictionary/api/word_api.dart';
+import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
 import 'package:danef_dictionary/widgets/word_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lottie/flutter_lottie.dart';
+import 'package:fluttie/fluttie.dart';
 
 class Archive extends StatefulWidget {
   @override
@@ -17,12 +19,14 @@ class _ArchiveState extends State<Archive> {
   WordDatabase wordDatabase;
   Future<List<Word>> favoriteWords;
 
-  String _animationFilePath = 'assets/animations/loading_word_list.json';
+  FluttieAnimationController _loadingWordsAnimation;
+  bool _animationReady = false;
 
   @override
   void initState() {
-    super.initState();
+    _prepareAnimation();
     wordData = getWordData();
+    super.initState();
   }
 
   @override
@@ -49,16 +53,32 @@ class _ArchiveState extends State<Archive> {
           );
         } else {
           return Center(
-            child: LottieView.fromFile(
-              autoPlay: true,
-              loop: true,
-              onViewCreated: null,
-              filePath: _animationFilePath
-            )
+            child: _animationReady ?
+                      FluttieAnimation(
+                        _loadingWordsAnimation,
+                        size: Size(350, 350),
+                      ) :
+                      Container()
           );
         }
       },
     );
+  }
+
+  _prepareAnimation() async {
+    final instance = Fluttie();
+    final loadingWordsComposition =
+    await instance.loadAnimationFromAsset(Assets.loading_words_anim_path);
+    _loadingWordsAnimation = await instance.prepareAnimation(
+      loadingWordsComposition,
+      repeatMode: RepeatMode.START_OVER,
+    );
+    if (mounted) {
+      setState(() {
+        _animationReady = true;
+        _loadingWordsAnimation.start();
+      });
+    }
   }
 
   Future<List<Word>> getWordData() async {

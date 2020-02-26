@@ -20,7 +20,6 @@ dependencies:
   sqflite: ^1.2.0
   path_provider: ^1.5.1
   shared_preferences: 0.5.6
-  flutter_lottie: ^0.2.0
   fluttie: ^0.3.0
 
 dev_dependencies:
