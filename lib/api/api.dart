@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:danef_dictionary/config/constants.dart';
 import 'package:danef_dictionary/models/word.dart';
+//import 'package:flutter_config/flutter_config.dart';
+//import 'package:dotenv/dotenv.dart' show env;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
@@ -8,7 +11,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
   static Future<List<Word>> retrieveWords() async {
-    final url = '${Constants.BASE_URL}${Constants.wordsString}';
+    await getToken();
+    final baseUrl = DotEnv().env['BASE_URL'];
+    final url = '$baseUrl${Constants.wordsString}';
     final token = await getTokenFromSharedPrefs();
     final headers = {'Authorization': 'Bearer $token'};
     final response = await http.get(url, headers: headers);
@@ -18,9 +23,19 @@ class Api {
   }
 
   static getToken() async {
-    const requestContent = {"username": "admin", "password": "trC6&dw4ohM2", "rememberMe": "true"};
+    final baseUrl = DotEnv().env['BASE_URL'];
+    final username = DotEnv().env['username'];
+    final password = DotEnv().env['password'];
+    print('baseUrl: $baseUrl');
+    print('username: $username');
+    print('password: $password');
+    final requestContent = {
+      "username": "$username",
+      "password": "$password",
+      "rememberMe": "true"
+    };
     try {
-      final url = Constants.BASE_URL + Constants.AUTH_STRING;
+      final url = baseUrl + Constants.AUTH_STRING;
       final response = await http.post(
         url,
         headers: {HttpHeaders.contentTypeHeader: 'application/json'},

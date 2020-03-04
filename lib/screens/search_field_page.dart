@@ -28,8 +28,6 @@ class _SearchFieldPageState extends State<SearchFieldPage>
 
   @override
   void initState() {
-    super.initState();
-    Api.getToken();
     var actualHeight = _getActualHeight();
     var animationEnd = -actualHeight * 0.375;
     searchFieldAnimController = AnimationController(
@@ -54,6 +52,7 @@ class _SearchFieldPageState extends State<SearchFieldPage>
                 curve: Curves.fastLinearToSlowEaseIn
               )
             ).animate(meaningAnimFromRightController);
+    super.initState();
   }
 
   @override
