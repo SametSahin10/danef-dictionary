@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:danef_dictionary/api/word_api.dart';
+import 'package:danef_dictionary/api/api.dart';
 import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
@@ -24,7 +22,7 @@ class _ArchiveState extends State<Archive> {
   @override
   void initState() {
     _prepareAnimation();
-    wordData = getWordData();
+    wordData = Api.retrieveWords();
     super.initState();
   }
 
@@ -78,14 +76,6 @@ class _ArchiveState extends State<Archive> {
         _loadingWordsAnimation.start();
       });
     }
-  }
-
-  Future<List<Word>> getWordData() async {
-    var words = await WordAPI().getWords();
-    var wordMap = json.decode(words);
-    var wordList = WordList();
-    wordList = WordList.fromJson(wordMap);
-    return wordList.words;
   }
 
    _isInFavorites(List<Word> words, Word word) {

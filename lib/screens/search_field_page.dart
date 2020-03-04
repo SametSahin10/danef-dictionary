@@ -1,3 +1,4 @@
+import 'package:danef_dictionary/api/api.dart';
 import 'package:danef_dictionary/screens/home_page.dart';
 import 'package:danef_dictionary/widgets/meaning_widget.dart';
 import 'package:danef_dictionary/widgets/search_widget.dart';
@@ -28,6 +29,7 @@ class _SearchFieldPageState extends State<SearchFieldPage>
   @override
   void initState() {
     super.initState();
+    Api.getToken();
     var actualHeight = _getActualHeight();
     var animationEnd = -actualHeight * 0.375;
     searchFieldAnimController = AnimationController(

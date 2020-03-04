@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:danef_dictionary/api/word_api.dart';
+import 'package:danef_dictionary/api/api.dart';
 import 'package:danef_dictionary/models/word.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -83,12 +81,8 @@ class _SearchFieldState extends State<SearchField> {
   }
 
   Future<List<String>> getWordData(String pattern) async {
-    var result = await WordAPI().getWords();
-    var wordMap = json.decode(result);
-    print('wordMap: $wordMap');
-    WordList wordList = WordList.fromJson(wordMap);
+    var words = await Api.retrieveWords();
     List<String> wordsAsStrings = new List();
-    words = wordList.words;
     for (final word in words) {
       if (word.adige.contains(pattern)) {
         wordsAsStrings.add(word.adige);
