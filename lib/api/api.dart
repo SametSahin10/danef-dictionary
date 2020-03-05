@@ -11,18 +11,50 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
   static Future<List<Word>> retrieveWords() async {
-    await getToken();
     final baseUrl = DotEnv().env['BASE_URL'];
     final url = '$baseUrl${Constants.wordsString}';
-    final token = await getTokenFromSharedPrefs();
-    final headers = {'Authorization': 'Bearer $token'};
+    final token = await getToken();
+    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
     final response = await http.get(url, headers: headers);
     final wordList = WordList.fromJson(json.decode(response.body));
     wordList.words.forEach((word) => print(word.adige));
     return wordList.words;
   }
 
-  static getToken() async {
+  static Future<List<Word>> retrieveTurkishWordsByPattern(String pattern)
+    async {
+      final baseUrl = DotEnv().env['BASE_URL'];
+      final url =
+          '$baseUrl${Constants.wordsString}${Constants.turkishString}$pattern';
+      final token = await getToken();
+      final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+      final response = await http.get(url, headers: headers);
+      final wordList = WordList.fromJson(json.decode(response.body));
+      wordList.words.forEach((word) => print(word.turkish));
+      return wordList.words;
+    }
+
+  static Future<List<Word>> retrieveAdigeWordsByPattern(String pattern)
+    async {
+      final baseUrl = DotEnv().env['BASE_URL'];
+      final url =
+          '$baseUrl${Constants.wordsString}${Constants.adigeString}$pattern';
+      final token = await getToken();
+      final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+      final response = await http.get(url, headers: headers);
+      final wordList = WordList.fromJson(json.decode(response.body));
+      wordList.words.forEach((word) => print(word.adige));
+      return wordList.words;
+    }
+
+
+  static Future<String> getToken() async {
+    final token = await getTokenFromSharedPrefs();
+    if (token == null) await retrieveToken();
+    return await getTokenFromSharedPrefs();
+  }
+
+  static retrieveToken() async {
     final baseUrl = DotEnv().env['BASE_URL'];
     final username = DotEnv().env['username'];
     final password = DotEnv().env['password'];

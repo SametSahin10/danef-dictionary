@@ -157,6 +157,9 @@ class _SearchFieldPageState extends State<SearchFieldPage>
 //  }
 
   _setWordAndMeaning(String word, String meaning) {
+    print('setting word and meaning');
+    print('word: $word');
+    print('meaning: $meaning');
     setState(() {
       _word = word;
       _meaning = meaning;

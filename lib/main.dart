@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'api/api.dart';
+
 void main() async {
   await DotEnv().load('.env');
   runApp(MyApp());
@@ -54,19 +56,8 @@ class DanefDictionary extends StatelessWidget {
 }
 
 Future<bool> _determineAppTheme() async {
-  // TODO: Make below call on it's own function returning future later.
-//  await _loadEnvVariables();
   SharedPreferences preferences = await SharedPreferences.getInstance();
   bool isDarkModeOn = (preferences.getBool('isDarkModeOn') ?? false);
   await Future.delayed(Duration(seconds: 2));
   return isDarkModeOn;
 }
-
-//_loadEnvVariables() async {
-//  try {
-//    load('.env');
-//    print(env['BASE_URL']);
-//  } catch (e) {
-//    print(e);
-//  }
-//}

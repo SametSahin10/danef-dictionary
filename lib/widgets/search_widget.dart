@@ -23,7 +23,7 @@ class SearchField extends StatefulWidget {
 }
 
 class _SearchFieldState extends State<SearchField> {
-  List<Word> words;
+  List<Word> wordsToSuggest = List();
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +56,9 @@ class _SearchFieldState extends State<SearchField> {
         borderRadius: BorderRadius.circular(18)
       ),
       suggestionsCallback: (pattern) {
-        return pattern.isEmpty ? null : getWordData(pattern);
+        return pattern.isEmpty ? null : getWords(pattern);
       },
+      noItemsFoundBuilder: (_) => _buildNoItemsFoundWidget(),
       keepSuggestionsOnLoading: false,
       itemBuilder: (context, suggestion) {
         return ListTile(
@@ -80,29 +81,52 @@ class _SearchFieldState extends State<SearchField> {
     );
   }
 
-  Future<List<String>> getWordData(String pattern) async {
-    var words = await Api.retrieveWords();
+  Future<List<String>> getWords(String pattern) async {
+    final matchingTurkishWords =
+              await Api.retrieveTurkishWordsByPattern(pattern);
+    final matchingAdigeWords =
+              await Api.retrieveAdigeWordsByPattern(pattern);
+    wordsToSuggest.addAll(matchingTurkishWords);
+    wordsToSuggest.addAll(matchingAdigeWords);
     List<String> wordsAsStrings = new List();
-    for (final word in words) {
-      if (word.adige.contains(pattern)) {
-        wordsAsStrings.add(word.adige);
+    matchingTurkishWords.forEach(
+      (matchingTurkishWord) {
+        wordsAsStrings.add(matchingTurkishWord.turkish);
       }
-      if (word.turkish.contains(pattern)) {
-        wordsAsStrings.add(word.turkish);
+    );
+    matchingAdigeWords.forEach(
+      (matchingAdigeWord) {
+        wordsAsStrings.add(matchingAdigeWord.adige);
       }
-    }
+    );
     return wordsAsStrings;
   }
 
   getMeaning(String word) {
-    for (final element in words) {
-      if (element.adige == word) {
-        return element.turkish;
+    for (final wordToSuggest in wordsToSuggest) {
+      if (wordToSuggest.adige == word) {
+        return wordToSuggest.turkish;
       }
-      if (element.turkish == word) {
-        return element.adige;
+      if (wordToSuggest.turkish == word) {
+        return wordToSuggest.adige;
       }
     }
     return "Could not find meaning";
   }
+}
+
+Widget _buildNoItemsFoundWidget() {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Container(
+      width: double.infinity,
+      child: Text(
+        'No items found',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 22,
+        ),
+      ),
+    ),
+  );
 }
