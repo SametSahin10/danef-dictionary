@@ -1,6 +1,7 @@
 import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
+import 'package:danef_dictionary/widgets/favourite_word_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttie/fluttie.dart';
 
@@ -69,23 +70,52 @@ class _FavoriteWordsState extends State<FavoriteWords> {
       });
     }
   }
+
+  Widget _buildFavouriteWords(List<Word> words) {
+    return ListView.separated(
+        padding: EdgeInsets.all(8),
+        separatorBuilder: (_, index) {
+          return Divider(
+            indent: 8,
+            endIndent: 8,
+            color: Colors.black26,
+          );
+        },
+        itemCount: words.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(
+              words[index].adige,
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            subtitle: Text(
+              words[index].turkish,
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            trailing: IconButton(
+                icon: Icon(Icons.favorite, color: Colors.green, size: 28),
+                onPressed: () {
+                  print('removing ${words[index].adige} from list');
+                  _deleteFromFavorites(words[index]);
+                  setState(() {
+                    words.removeAt(index);
+                  });
+                }
+            ),
+          );
+        });
+  }
+
 }
 
-Widget _buildFavouriteWords(List<Word> words) {
-  return ListView.builder(
-      padding: EdgeInsets.all(8),
-      itemCount: words.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(
-            words[index].adige,
-            style: TextStyle(fontSize: 20, fontFamily: 'DidactGothic'),
-          ),
-          trailing: IconButton(
-            icon: Icon(Icons.favorite),
-          ),
-        );
-      });
+_deleteFromFavorites(Word word) {
+  print('removing ${word.adige} from database');
+  WordDatabase wordDatabase = WordDatabase();
+  wordDatabase.deleteWord(word.wordId);
 }
 
 

@@ -19,6 +19,11 @@ class _ArchiveState extends State<Archive> {
   FluttieAnimationController _loadingWordsAnimation;
   bool _animationReady = false;
 
+  static const tabs = <Widget>[
+    Tab(text: 'Adige'),
+    Tab(text: 'Turkish')
+  ];
+
   @override
   void initState() {
     _prepareAnimation();
@@ -39,14 +44,27 @@ class _ArchiveState extends State<Archive> {
           if (wordSnapshot.hasError) {
             return Center(child: Icon(Icons.error));
           }
-          return ListView.builder(
-            padding: EdgeInsets.all(8),
-            itemCount: words.length,
-            itemBuilder: (context, index) {
-              return _isInFavorites(favoriteWords, words[index]) ?
-                         WordTile(words[index], isFavourite: true) :
-                         WordTile(words[index], isFavourite: false);
-            }
+          return ListView.separated(
+              separatorBuilder: (_, index) {
+                return Divider(
+                  indent: 8,
+                  endIndent: 8,
+                  color: Colors.black26,
+                );
+              },
+              padding: EdgeInsets.all(8),
+              itemCount: words.length,
+              itemBuilder: (context, index) {
+                return _isInFavorites(favoriteWords, words[index]) ?
+                WordTile(
+                    words[index],
+                    isFavourite: true
+                ) :
+                WordTile(
+                    words[index],
+                    isFavourite: false
+                );
+              }
           );
         } else {
           return Center(
