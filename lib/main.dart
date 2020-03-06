@@ -3,12 +3,8 @@ import 'package:danef_dictionary/screens/home_page.dart';
 import 'package:danef_dictionary/screens/splash_screen.dart';
 import 'package:danef_dictionary/widgets/theme_inherited_widget.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_config/flutter_config.dart';
-//import 'package:dotenv/dotenv.dart' show load, env;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'api/api.dart';
 
 void main() async {
   await DotEnv().load('.env');
