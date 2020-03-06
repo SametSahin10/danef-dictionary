@@ -33,7 +33,7 @@ class _FavoriteWordsState extends State<FavoriteWords> {
           if (wordSnapshot.hasError) {
             return Center(child: Icon(Icons.error));
           } else {
-            if (words == null) {
+            if (words == null || words.isEmpty) {
               return Center(
                 child: _animationReady ?
                           FluttieAnimation(
