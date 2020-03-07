@@ -87,6 +87,7 @@ class _ArchiveState extends State<Archive> {
     _loadingWordsAnimation = await instance.prepareAnimation(
       loadingWordsComposition,
       repeatMode: RepeatMode.START_OVER,
+      repeatCount: RepeatCount.infinite()
     );
     if (mounted) {
       setState(() {

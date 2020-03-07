@@ -61,6 +61,7 @@ class _FavoriteWordsState extends State<FavoriteWords> {
     _sleepingCatAnim = await instance.prepareAnimation(
       sleepingCatComp,
       repeatMode: RepeatMode.START_OVER,
+      repeatCount: RepeatCount.infinite()
     );
     if (mounted) {
       setState(() {
