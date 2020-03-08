@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:danef_dictionary/api/word_api.dart';
+import 'package:danef_dictionary/api/api.dart';
 import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
@@ -21,10 +19,15 @@ class _ArchiveState extends State<Archive> {
   FluttieAnimationController _loadingWordsAnimation;
   bool _animationReady = false;
 
+  static const tabs = <Widget>[
+    Tab(text: 'Adige'),
+    Tab(text: 'Turkish')
+  ];
+
   @override
   void initState() {
     _prepareAnimation();
-    wordData = getWordData();
+    wordData = Api.retrieveWords();
     super.initState();
   }
 
@@ -41,14 +44,27 @@ class _ArchiveState extends State<Archive> {
           if (wordSnapshot.hasError) {
             return Center(child: Icon(Icons.error));
           }
-          return ListView.builder(
-            padding: EdgeInsets.all(8),
-            itemCount: words.length,
-            itemBuilder: (context, index) {
-              return _isInFavorites(favoriteWords, words[index]) ?
-                         WordTile(words[index], isFavourite: true) :
-                         WordTile(words[index], isFavourite: false);
-            }
+          return ListView.separated(
+              separatorBuilder: (_, index) {
+                return Divider(
+                  indent: 8,
+                  endIndent: 8,
+                  color: Colors.black26,
+                );
+              },
+              padding: EdgeInsets.all(8),
+              itemCount: words.length,
+              itemBuilder: (context, index) {
+                return _isInFavorites(favoriteWords, words[index]) ?
+                WordTile(
+                    words[index],
+                    isFavourite: true
+                ) :
+                WordTile(
+                    words[index],
+                    isFavourite: false
+                );
+              }
           );
         } else {
           return Center(
@@ -71,6 +87,7 @@ class _ArchiveState extends State<Archive> {
     _loadingWordsAnimation = await instance.prepareAnimation(
       loadingWordsComposition,
       repeatMode: RepeatMode.START_OVER,
+      repeatCount: RepeatCount.infinite()
     );
     if (mounted) {
       setState(() {
@@ -78,14 +95,6 @@ class _ArchiveState extends State<Archive> {
         _loadingWordsAnimation.start();
       });
     }
-  }
-
-  Future<List<Word>> getWordData() async {
-    var words = await WordAPI().getWords();
-    var wordMap = json.decode(words);
-    var wordList = WordList();
-    wordList = WordList.fromJson(wordMap);
-    return wordList.words;
   }
 
    _isInFavorites(List<Word> words, Word word) {

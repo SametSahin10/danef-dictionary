@@ -2,6 +2,7 @@ import 'package:danef_dictionary/screens/home_page.dart';
 import 'package:danef_dictionary/widgets/meaning_widget.dart';
 import 'package:danef_dictionary/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 class SearchFieldPage extends StatefulWidget {
   @override
@@ -27,7 +28,6 @@ class _SearchFieldPageState extends State<SearchFieldPage>
 
   @override
   void initState() {
-    super.initState();
     var actualHeight = _getActualHeight();
     var animationEnd = -actualHeight * 0.375;
     searchFieldAnimController = AnimationController(
@@ -52,6 +52,16 @@ class _SearchFieldPageState extends State<SearchFieldPage>
                 curve: Curves.fastLinearToSlowEaseIn
               )
             ).animate(meaningAnimFromRightController);
+    KeyboardVisibilityNotification().addNewListener(
+        onChange: (bool visible) {
+          if (!visible) {
+            if (!_isMeaningVisible) {
+              searchFieldAnimController.reverse();
+            }
+          }
+        }
+    );
+    super.initState();
   }
 
   @override
@@ -156,6 +166,9 @@ class _SearchFieldPageState extends State<SearchFieldPage>
 //  }
 
   _setWordAndMeaning(String word, String meaning) {
+    print('setting word and meaning');
+    print('word: $word');
+    print('meaning: $meaning');
     setState(() {
       _word = word;
       _meaning = meaning;
