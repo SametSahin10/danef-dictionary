@@ -19,11 +19,6 @@ class _ArchiveState extends State<Archive> {
   FluttieAnimationController _loadingWordsAnimation;
   bool _animationReady = false;
 
-  static const tabs = <Widget>[
-    Tab(text: 'Adige'),
-    Tab(text: 'Turkish')
-  ];
-
   @override
   void initState() {
     _prepareAnimation();
