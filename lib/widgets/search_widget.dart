@@ -1,5 +1,6 @@
 import 'package:danef_dictionary/api/api.dart';
 import 'package:danef_dictionary/models/word.dart';
+import 'package:easy_localization/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
@@ -51,7 +52,7 @@ class _SearchFieldState extends State<SearchField> {
               onPressed: () => widget.textEditingController.clear(),
             ),
           ),
-          hintText: 'Search a word...')),
+          hintText: tr("search_field_page.search_a_word"))),
       suggestionsBoxDecoration: SuggestionsBoxDecoration(
         borderRadius: BorderRadius.circular(18)
       ),
@@ -111,7 +112,7 @@ class _SearchFieldState extends State<SearchField> {
         return wordToSuggest.adige;
       }
     }
-    return "Could not find meaning";
+    return tr("search_field_page.no_meaning_desc_text");
   }
 }
 
@@ -121,7 +122,7 @@ Widget _buildNoItemsFoundWidget() {
     child: Container(
       width: double.infinity,
       child: Text(
-        'No items found',
+        tr("search_field_page.no_match_found_desc_text"),
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 22,

@@ -1,4 +1,5 @@
 import 'package:danef_dictionary/utils/utils.dart';
+import 'package:easy_localization/public.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -60,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 duration: Duration(seconds: 2),
                 child: Center(
                   child: Text(
-                    'Sponsored by\nMehdi Çetinbaş',
+                    tr("splash_screen.sponsored_by_text"),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 28,

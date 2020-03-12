@@ -1,0 +1,26 @@
+{
+  "splash_screen": {
+    "sponsored_by_text": "Sponsored by\nMehdi Çetinbaş"
+  },
+  "title": "Danef Dictionary",
+  "bottom_nav_bar": {
+    "word_list": "Word List",
+    "search": "Search",
+    "favourites": "Favourites"
+  },
+  "search_field_page": {
+    "search_again": "Search again",
+    "search_a_word": "Search a word...",
+    "no_meaning_desc_text": "Could not find meaning.",
+    "no_match_found_desc_text": "No items found"
+  },
+  "settings": {
+    "app_bar_title": "Settings",
+    "turn_on_the_lights": "Turn on the lights",
+    "turn_off_the_lights": "Turn off the lights",
+    "share": "Share",
+    "give_feedback": "Give feedback",
+    "rate_the_app": "Rate the app",
+    "developer_desc_text": "Developer: Samet Şahin"
+  }
+}

@@ -1,6 +1,7 @@
 import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/config/constants.dart';
 import 'package:danef_dictionary/widgets/theme_inherited_widget.dart';
+import 'package:easy_localization/public.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttie/fluttie.dart';
@@ -11,7 +12,7 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Settings')),
+      appBar: AppBar(title: Text(tr("settings.app_bar_title"),)),
       body: Preferences(),
     );
   }
@@ -52,7 +53,7 @@ class _PreferencesState extends State<Preferences> {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      'Developer: Samet Şahin',
+                      tr("settings.developer_desc_text"),
                       style: TextStyle(fontSize: 24),
                     ),
                     Text(
@@ -81,7 +82,8 @@ class _PreferencesState extends State<Preferences> {
             Image.asset(Assets.moon, width: 20, height: 20),
             title: Text(
               ThemeSwitcher.of(context).isDarkModeOn ?
-              'Turn on the lights' : 'Turn off the lights',
+                tr("settings.turn_on_the_lights") :
+                tr("settings.turn_off_the_lights"),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () => ThemeSwitcher.of(context).switchDarkMode(),
@@ -93,7 +95,7 @@ class _PreferencesState extends State<Preferences> {
               Colors.white : Colors.black,
             ),
             title: Text(
-              'Share',
+              tr("settings.share"),
               style: TextStyle(fontSize: 20),
             ),
             onTap: _launchShare,
@@ -105,7 +107,7 @@ class _PreferencesState extends State<Preferences> {
               Colors.white : Colors.black,
             ),
             title: Text(
-              'Give feedback',
+            tr("settings.give_feedback"),
               style: TextStyle(fontSize: 20),
             ),
             onTap: _launchMailClient,
@@ -117,7 +119,7 @@ class _PreferencesState extends State<Preferences> {
               Colors.white : Colors.black,
             ),
             title: Text(
-              'Rate the app',
+              tr("settings.rate_the_app"),
               style: TextStyle(fontSize: 20),
             ),
             onTap: _launchGooglePlayPage,
