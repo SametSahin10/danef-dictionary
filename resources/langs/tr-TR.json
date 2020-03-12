@@ -1,0 +1,26 @@
+{
+  "splash_screen": {
+    "sponsored_by_text": "Sponsor: Mehdi Çetinbaş"
+  },
+  "title": "Danef Sözlük",
+  "bottom_nav_bar": {
+    "word_list": "Kelime Listesi",
+    "search": "Ara",
+    "favourites": "Favoriler"
+  },
+  "search_field_page": {
+    "search_again": "Tekrar ara",
+    "search_a_word": "Kelime ara...",
+    "no_meaning_desc_text": "Karşılık bulunamadı.",
+    "no_match_found_desc_text": "Kelime bulunamadı."
+  },
+  "settings" : {
+    "app_bar_title": "Ayarlar",
+    "turn_on_the_lights": "Işıkları aç",
+    "turn_off_the_lights": "Işıkları kapat",
+    "share": "Paylaş",
+    "give_feedback": "Geri bildirim",
+    "rate_the_app": "Değerlendir",
+    "developer_desc_text": "Geliştirici: Samet Şahin"
+  }
+}

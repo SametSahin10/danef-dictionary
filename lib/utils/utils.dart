@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final GREEN_GRADIENT = LinearGradient(
+final greenGradient = LinearGradient(
   colors: [
     Color(0xff4cb050),
     Color(0xff3cba92),
