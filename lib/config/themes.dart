@@ -69,7 +69,7 @@ darkTheme(context) {
     primarySwatch: Colors.green,
     primaryColor: Colors.black,
     accentColor: Colors.green,
-    fontFamily: 'DidactGothic',
+    fontFamily: 'Roboto',
     scaffoldBackgroundColor: Colors.black,
     disabledColor: Colors.green,
     indicatorColor: Colors.green,
