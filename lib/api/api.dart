@@ -16,7 +16,7 @@ class Api {
     final token = await getToken();
     final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
     final response = await http.get(url, headers: headers);
-    final wordList = WordList.fromJson(json.decode(response.body));
+    final wordList = WordList.fromJson(json.decode(utf8.decode(response.bodyBytes)));
     wordList.words.forEach((word) => print(word.adige));
     return wordList.words;
   }
@@ -29,7 +29,7 @@ class Api {
       final token = await getToken();
       final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
       final response = await http.get(url, headers: headers);
-      final wordList = WordList.fromJson(json.decode(response.body));
+      final wordList = WordList.fromJson(json.decode(utf8.decode(response.bodyBytes)));
       wordList.words.forEach((word) => print(word.turkish));
       return wordList.words;
     }
@@ -42,7 +42,7 @@ class Api {
       final token = await getToken();
       final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
       final response = await http.get(url, headers: headers);
-      final wordList = WordList.fromJson(json.decode(response.body));
+      final wordList = WordList.fromJson(json.decode(utf8.decode(response.bodyBytes)));
       wordList.words.forEach((word) => print(word.adige));
       return wordList.words;
     }
