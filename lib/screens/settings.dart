@@ -12,7 +12,10 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(tr("settings.app_bar_title"),)),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(tr("settings.app_bar_title")),
+      ),
       body: Preferences(),
     );
   }
@@ -38,42 +41,54 @@ class _PreferencesState extends State<Preferences> {
     return Column(
       children: <Widget>[
         _buildListView(),
-        Expanded(
-          child: Column(
+        Container(
+          height: MediaQuery.of(context).size.height * 0.5,
+          child: Stack(
+            fit: StackFit.expand,
+            alignment: Alignment.center,
             children: <Widget>[
-              _animationReady ? AnimatedOpacity(
-                opacity: _animationReady ? 1.0 : 0.0,
-                duration: Duration(seconds: 1),
-                child: FluttieAnimation(
-                  _developerWorkingAnimation,
-                  size: Size(350, 350)
+              _animationReady ? Align(
+                alignment: Alignment.center,
+                child: AnimatedOpacity(
+                  opacity: _animationReady ? 1.0 : 0.0,
+                  duration: Duration(seconds: 1),
+                  child: FluttieAnimation(
+                      _developerWorkingAnimation,
+                      size: Size(
+                          double.infinity,
+                          MediaQuery.of(context).size.height * 0.5
+                      )
+                  ),
                 ),
-              ) : Container(),
-              GestureDetector(
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      tr("settings.developer_desc_text"),
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    Text(
-                      'sametsahin.dev',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ],
+              ) : Align(alignment: Alignment.center, child: Container()),
+              Positioned(
+                bottom: 36,
+                child: GestureDetector(
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        tr("settings.developer_desc_text"),
+                        style: TextStyle(fontSize: 24),
+                      ),
+                      Text(
+                        'sametsahin.dev',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                  onTap: _launchDeveloperPortfolio,
                 ),
-                onTap: _launchDeveloperPortfolio,
               )
             ],
           ),
-        )
+        ),
       ],
     );
   }
   
   Widget _buildListView() {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 0.35,
       child: ListView(
         children: <Widget>[
           ListTile(
