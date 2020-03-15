@@ -1,3 +1,5 @@
+<img src="https://api.codemagic.io/apps/5e307975cb1395000fdd3e8e/5e307975cb1395000fdd3e8d/status_badge.svg"/>
+
 # danef_dictionary
 
 A new Flutter project.

@@ -57,7 +57,7 @@ class _SearchFieldState extends State<SearchField> {
         borderRadius: BorderRadius.circular(18)
       ),
       suggestionsCallback: (pattern) {
-        return pattern.isEmpty ? null : getWords(pattern);
+        return pattern.isEmpty ? null : getWords(pattern.toLowerCase());
       },
       noItemsFoundBuilder: (_) => _buildNoItemsFoundWidget(),
       keepSuggestionsOnLoading: false,
