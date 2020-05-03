@@ -11,10 +11,11 @@ final String columnTurkish = 'turkish';
 class Word {
   @JsonKey(ignore: true)
   int id;
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'ID')
   int wordId;
   String adige;
   String turkish;
+  int numOfTimesSearched;
   Word(this.wordId, this.adige, this.turkish);
 
   factory Word.fromJson(Map<String, dynamic> json) => _$WordFromJson(json);

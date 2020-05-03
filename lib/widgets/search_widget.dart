@@ -12,12 +12,13 @@ class SearchField extends StatefulWidget {
   Function showMeaning;
   Function setWordAndMeaning;
 
-  SearchField({this.textEditingController,
-               this.focusNode,
-               this.isClearIconVisible,
-               this.clearMeaning,
-               this.showMeaning,
-               this.setWordAndMeaning});
+  SearchField(
+      {this.textEditingController,
+      this.focusNode,
+      this.isClearIconVisible,
+      this.clearMeaning,
+      this.showMeaning,
+      this.setWordAndMeaning});
 
   @override
   _SearchFieldState createState() => _SearchFieldState();
@@ -30,32 +31,31 @@ class _SearchFieldState extends State<SearchField> {
   Widget build(BuildContext context) {
     return TypeAheadField(
       textFieldConfiguration: TextFieldConfiguration(
-        controller: widget.textEditingController,
-        focusNode: widget.focusNode,
-        onChanged: (newValue) {
-          setState(() {
-            if (newValue.length == 0) {
-              widget.isClearIconVisible = false;
-            } else {
-              widget.isClearIconVisible = true;
-            }
-          });
-        },
-        textAlign: TextAlign.center,
-        style: DefaultTextStyle.of(context).style.copyWith(fontSize: 20),
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search),
-          suffixIcon: Visibility(
-            visible: widget.isClearIconVisible,
-            child: IconButton(
-              icon: Icon(Icons.cancel),
-              onPressed: () => widget.textEditingController.clear(),
-            ),
-          ),
-          hintText: tr("search_field_page.search_a_word"))),
-      suggestionsBoxDecoration: SuggestionsBoxDecoration(
-        borderRadius: BorderRadius.circular(18)
-      ),
+          controller: widget.textEditingController,
+          focusNode: widget.focusNode,
+          onChanged: (newValue) {
+            setState(() {
+              if (newValue.length == 0) {
+                widget.isClearIconVisible = false;
+              } else {
+                widget.isClearIconVisible = true;
+              }
+            });
+          },
+          textAlign: TextAlign.center,
+          style: DefaultTextStyle.of(context).style.copyWith(fontSize: 20),
+          decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search),
+              suffixIcon: Visibility(
+                visible: widget.isClearIconVisible,
+                child: IconButton(
+                  icon: Icon(Icons.cancel),
+                  onPressed: () => widget.textEditingController.clear(),
+                ),
+              ),
+              hintText: tr("search_field_page.search_a_word"))),
+      suggestionsBoxDecoration:
+          SuggestionsBoxDecoration(borderRadius: BorderRadius.circular(18)),
       suggestionsCallback: (pattern) {
         return pattern.isEmpty ? null : getWords(pattern.toLowerCase());
       },
@@ -83,23 +83,29 @@ class _SearchFieldState extends State<SearchField> {
   }
 
   Future<List<String>> getWords(String pattern) async {
-    final matchingTurkishWords =
-              await Api.retrieveTurkishWordsByPattern(pattern);
-    final matchingAdigeWords =
-              await Api.retrieveAdigeWordsByPattern(pattern);
-    wordsToSuggest.addAll(matchingTurkishWords);
-    wordsToSuggest.addAll(matchingAdigeWords);
+//    final matchingTurkishWords =
+//              await Api.retrieveTurkishWordsByPattern(pattern);
+//    final matchingAdigeWords =
+//              await Api.retrieveAdigeWordsByPattern(pattern);
+    final matchingWords = await Api.retrieveWordsByPattern(pattern);
+//    wordsToSuggest.addAll(matchingTurkishWords);
+//    wordsToSuggest.addAll(matchingAdigeWords);
+    wordsToSuggest.addAll(matchingWords);
     List<String> wordsAsStrings = new List();
-    matchingTurkishWords.forEach(
-      (matchingTurkishWord) {
-        wordsAsStrings.add(matchingTurkishWord.turkish);
-      }
-    );
-    matchingAdigeWords.forEach(
-      (matchingAdigeWord) {
-        wordsAsStrings.add(matchingAdigeWord.adige);
-      }
-    );
+//    matchingTurkishWords.forEach(
+//      (matchingTurkishWord) {
+//        wordsAsStrings.add(matchingTurkishWord.turkish);
+//      }
+//    );
+//    matchingAdigeWords.forEach(
+//      (matchingAdigeWord) {
+//        wordsAsStrings.add(matchingAdigeWord.adige);
+//      }
+//    );
+    matchingWords.forEach((matchingWord) {
+      wordsAsStrings.add(matchingWord.adige);
+      wordsAsStrings.add(matchingWord.turkish);
+    });
     return wordsAsStrings;
   }
 
