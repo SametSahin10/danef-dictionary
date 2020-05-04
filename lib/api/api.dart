@@ -13,40 +13,63 @@ class Api {
   static Future<List<Word>> retrieveWords() async {
     final baseUrl = DotEnv().env['BASE_URL'];
     final url = '$baseUrl${Constants.wordsString}';
-    final token = await getToken();
-    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    final response = await http.get(url, headers: headers);
-    final wordList = WordList.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+//    final token = await getToken();
+//    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+//    final response = await http.get(url, headers: headers);
+    final response = await http.get(url);
+//    print('response: ${response.body}');
+    final decodedJson = json.decode(utf8.decode(response.bodyBytes));
+    final wordList = WordList.fromJson(decodedJson['data']);
     wordList.words.forEach((word) => print(word.adige));
     return wordList.words;
   }
 
-  static Future<List<Word>> retrieveTurkishWordsByPattern(String pattern)
-    async {
-      final baseUrl = DotEnv().env['BASE_URL'];
-      final url =
-          '$baseUrl${Constants.wordsString}${Constants.turkishString}$pattern';
-      final token = await getToken();
-      final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-      final response = await http.get(url, headers: headers);
-      final wordList = WordList.fromJson(json.decode(utf8.decode(response.bodyBytes)));
-      wordList.words.forEach((word) => print(word.turkish));
-      return wordList.words;
-    }
+  static Future<List<Word>> retrieveWordsByPattern(String pattern) async {
+    final baseUrl = DotEnv().env['BASE_URL'];
+    final url = '$baseUrl${Constants.wordsString}'
+        '?${Constants.adigeString}'
+        '$pattern&'
+        '${Constants.turkishString}'
+        '$pattern';
+    print('retrieving words by pattern. URL: $url');
+//    final token = await getToken();
+//    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+//    final response = await http.get(url, headers: headers);
+    final response = await http.get(url);
+    final decodedJson = json.decode(utf8.decode(response.bodyBytes));
+    final wordList = WordList.fromJson(decodedJson['data']);
+    wordList.words.forEach((word) => print(word.adige));
+    return wordList.words;
+  }
 
-  static Future<List<Word>> retrieveAdigeWordsByPattern(String pattern)
-    async {
-      final baseUrl = DotEnv().env['BASE_URL'];
-      final url =
-          '$baseUrl${Constants.wordsString}${Constants.adigeString}$pattern';
-      final token = await getToken();
-      final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-      final response = await http.get(url, headers: headers);
-      final wordList = WordList.fromJson(json.decode(utf8.decode(response.bodyBytes)));
-      wordList.words.forEach((word) => print(word.adige));
-      return wordList.words;
-    }
+  static Future<List<Word>> retrieveTurkishWordsByPattern(
+      String pattern) async {
+    final baseUrl = DotEnv().env['BASE_URL'];
+    final url =
+        '$baseUrl${Constants.wordsString}?${Constants.turkishString}$pattern';
+//    final token = await getToken();
+//    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+//    final response = await http.get(url, headers: headers);
+    final response = await http.get(url);
+    final decodedJson = json.decode(utf8.decode(response.bodyBytes));
+    final wordList = WordList.fromJson(decodedJson['data']);
+    wordList.words.forEach((word) => print(word.turkish));
+    return wordList.words;
+  }
 
+  static Future<List<Word>> retrieveAdigeWordsByPattern(String pattern) async {
+    final baseUrl = DotEnv().env['BASE_URL'];
+    final url =
+        '$baseUrl${Constants.wordsString}?${Constants.adigeString}$pattern';
+//    final token = await getToken();
+//    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+//    final response = await http.get(url, headers: headers);
+    final response = await http.get(url);
+    final decodedJson = json.decode(utf8.decode(response.bodyBytes));
+    final wordList = WordList.fromJson(decodedJson['data']);
+    wordList.words.forEach((word) => print(word.adige));
+    return wordList.words;
+  }
 
   static Future<String> getToken() async {
     final token = await getTokenFromSharedPrefs();
@@ -68,10 +91,9 @@ class Api {
     };
     try {
       final url = baseUrl + Constants.AUTH_STRING;
-      final response = await http.post(
-        url,
-        headers: {HttpHeaders.contentTypeHeader: 'application/json'},
-        body: json.encode(requestContent));
+      final response = await http.post(url,
+          headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+          body: json.encode(requestContent));
       if (response.statusCode == HttpStatus.ok) {
         print('Retrieved JWT token succesfully');
         final responseBody = json.decode(response.body);
