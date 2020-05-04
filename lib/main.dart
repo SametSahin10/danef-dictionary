@@ -10,52 +10,29 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   await DotEnv().load('.env');
-  runApp(EasyLocalization(child: MyApp()));
+  _determineAppTheme().then((isDarkModeOn) {
+    runApp(EasyLocalization(
+        child: MyApp(
+      isDarkModeOn: isDarkModeOn,
+    )));
+  });
 }
 
 class MyApp extends StatelessWidget {
+  final bool isDarkModeOn;
+
+  MyApp({@required this.isDarkModeOn});
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<bool>(
-      future: _determineAppTheme(),
-      builder: (_, themeSnapshot) {
-        if (themeSnapshot.hasData) {
-          var isDarkModeOn = themeSnapshot.data;
-          return ThemeSwitcherWidget(
-            initialDarkModeOn: isDarkModeOn,
-            child: DanefDictionary(HomePage()),
-          );
-        } else {
-          final data = EasyLocalizationProvider.of(context).data;
-          return EasyLocalizationProvider(
-            data: data,
-            child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: [
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                EasyLocalizationDelegate(
-                    locale: data.locale,
-                    path: "resources/langs"
-                )
-              ],
-              supportedLocales: [Locale('tr', 'TR')],
-              locale: data.locale,
-              theme: lightTheme(context),
-              home: SplashScreen(),
-            ),
-          );
-        }
-      },
+    return ThemeSwitcherWidget(
+      initialDarkModeOn: isDarkModeOn,
+      child: DanefDictionary(),
     );
   }
 }
 
 class DanefDictionary extends StatelessWidget {
-  Widget _home;
-
-  DanefDictionary(this._home);
-
   @override
   Widget build(BuildContext context) {
     final data = EasyLocalizationProvider.of(context).data;
@@ -66,16 +43,14 @@ class DanefDictionary extends StatelessWidget {
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
-          EasyLocalizationDelegate(
-            locale: data.locale,
-            path: "resources/langs"
-          )
+          EasyLocalizationDelegate(locale: data.locale, path: "resources/langs")
         ],
         supportedLocales: [Locale('tr', 'TR')],
         locale: data.locale,
-        theme: ThemeSwitcher.of(context)
-            .isDarkModeOn ? darkTheme(context) : lightTheme(context),
-        home: _home,
+        theme: ThemeSwitcher.of(context).isDarkModeOn
+            ? darkTheme(context)
+            : lightTheme(context),
+        home: SplashScreen(),
       ),
     );
   }
@@ -84,6 +59,5 @@ class DanefDictionary extends StatelessWidget {
 Future<bool> _determineAppTheme() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   bool isDarkModeOn = (preferences.getBool('isDarkModeOn') ?? false);
-  await Future.delayed(Duration(seconds: 2));
   return isDarkModeOn;
 }

@@ -1,3 +1,4 @@
+import 'package:danef_dictionary/screens/home_page.dart';
 import 'package:danef_dictionary/utils/utils.dart';
 import 'package:easy_localization/public.dart';
 import 'package:flutter/material.dart';
@@ -13,17 +14,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => _showSponsorText());
+//    WidgetsBinding.instance
+//        .addPostFrameCallback((_) => _showSponsorText());
+    _showSponsorText();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: greenGradient
-        ),
+        decoration: BoxDecoration(gradient: greenGradient),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,10 +35,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Text(
                   'ADDER',
                   style: TextStyle(
-                    fontSize: 32,
-                    fontFamily: 'OpenSans',
-                    color: Colors.white
-                  ),
+                      fontSize: 32,
+                      fontFamily: 'OpenSans',
+                      color: Colors.white),
                 ),
               ),
             ),
@@ -47,10 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Center(
                 child: Text(
                   'Danef Dictionary',
-                  style: TextStyle(
-                    fontSize: 36,
-                    color: Colors.white
-                  ),
+                  style: TextStyle(fontSize: 36, color: Colors.white),
                 ),
               ),
             ),
@@ -58,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
               flex: 1,
               child: AnimatedOpacity(
                 opacity: _isSponsorTextVisible ? 1.0 : 0.0,
-                duration: Duration(seconds: 2),
+                duration: Duration(milliseconds: 1500),
                 child: Center(
                   child: Text(
                     tr("splash_screen.sponsored_by_text"),
@@ -66,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     style: TextStyle(
                       fontSize: 28,
                       fontFamily: 'OpenSans',
-                      color: Colors.white
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -78,9 +74,20 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  _showSponsorText() {
-    setState(() {
-      _isSponsorTextVisible = true;
+  _showSponsorText() async {
+    await Future.delayed(Duration(milliseconds: 500)).then((_) {
+      setState(() {
+        _isSponsorTextVisible = true;
+      });
+    });
+    await Future.delayed(Duration(milliseconds: 1500)).then((_) {
+      _pushHomePage(context);
     });
   }
+}
+
+_pushHomePage(BuildContext context) {
+  Navigator.of(context).push(
+    MaterialPageRoute(builder: (context) => HomePage()),
+  );
 }
