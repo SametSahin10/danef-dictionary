@@ -11,7 +11,7 @@ class SearchFieldPage extends StatefulWidget {
 }
 
 class _SearchFieldPageState extends State<SearchFieldPage>
-                            with TickerProviderStateMixin {
+    with TickerProviderStateMixin {
   final _textEditingController = TextEditingController();
   bool _isClearIconVisible = false;
   bool _isMeaningVisible = false;
@@ -31,37 +31,31 @@ class _SearchFieldPageState extends State<SearchFieldPage>
   void initState() {
     var actualHeight = _getActualHeight();
     var animationEnd = -actualHeight * 0.375;
-    searchFieldAnimController = AnimationController(
-      duration: Duration(milliseconds: 400),
-      vsync: this)..addListener(() => setState(() {}));
-    searchFieldAnimation = Tween(begin: 0.0, end: animationEnd).chain(
-                  CurveTween(
-                    curve: Curves.fastOutSlowIn
-                  )
-                ).animate(searchFieldAnimController);
+    searchFieldAnimController =
+        AnimationController(duration: Duration(milliseconds: 400), vsync: this)
+          ..addListener(() => setState(() {}));
+    searchFieldAnimation = Tween(begin: 0.0, end: animationEnd)
+        .chain(CurveTween(curve: Curves.fastOutSlowIn))
+        .animate(searchFieldAnimController);
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {
         searchFieldAnimController.forward();
       }
     });
 
-    meaningAnimFromRightController = AnimationController(
-      duration: Duration(milliseconds: 700),
-      vsync: this)..addListener(() => setState(() {}));
-    meaningAnimFromRight = Tween(begin: 400.0, end: 0.0).chain(
-              CurveTween(
-                curve: Curves.fastLinearToSlowEaseIn
-              )
-            ).animate(meaningAnimFromRightController);
-    KeyboardVisibilityNotification().addNewListener(
-        onChange: (bool visible) {
-          if (!visible) {
-            if (!_isMeaningVisible) {
-              searchFieldAnimController.reverse();
-            }
-          }
+    meaningAnimFromRightController =
+        AnimationController(duration: Duration(milliseconds: 700), vsync: this)
+          ..addListener(() => setState(() {}));
+    meaningAnimFromRight = Tween(begin: 400.0, end: 0.0)
+        .chain(CurveTween(curve: Curves.fastLinearToSlowEaseIn))
+        .animate(meaningAnimFromRightController);
+    KeyboardVisibilityNotification().addNewListener(onChange: (bool visible) {
+      if (!visible) {
+        if (!_isMeaningVisible) {
+          searchFieldAnimController.reverse();
         }
-    );
+      }
+    });
     super.initState();
   }
 
@@ -81,10 +75,10 @@ class _SearchFieldPageState extends State<SearchFieldPage>
           opacity: _isMeaningVisible ? 1.0 : 0.0,
           duration: Duration(milliseconds: 700),
           child: Center(
-              child: Transform.translate(
-                offset: Offset(meaningAnimFromRight.value, 0),
-                child: Meaning(word: _word, meaning: _meaning),
-              )
+            child: Transform.translate(
+              offset: Offset(meaningAnimFromRight.value, 0),
+              child: Meaning(word: _word, meaning: _meaning),
+            ),
           ),
         ),
         Center(
@@ -118,25 +112,20 @@ class _SearchFieldPageState extends State<SearchFieldPage>
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: FlatButton.icon(
-                padding: EdgeInsets.all(10),
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.green,
-                ),
-                label: Text(
-                  tr("Search again"),
-                  style: TextStyle(fontSize: 18),
-                ),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
+                  padding: EdgeInsets.all(10),
+                  icon: Icon(
+                    Icons.search,
                     color: Colors.green,
-                    width: 0.8
                   ),
-                  borderRadius: BorderRadius.circular(12)
-                ),
-                textColor: Colors.green,
-                onPressed: _focusOnSearchField
-              ),
+                  label: Text(
+                    tr("Search again"),
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.green, width: 0.8),
+                      borderRadius: BorderRadius.circular(12)),
+                  textColor: Colors.green,
+                  onPressed: _focusOnSearchField),
             ),
           ),
         )
@@ -185,10 +174,8 @@ class _SearchFieldPageState extends State<SearchFieldPage>
     // left for widgets to reside.
     var rawHeight = ScreenSizes.height;
     var padding = ScreenSizes.padding;
-    var actualHeight = rawHeight
-                        - padding.top
-                        - padding.bottom
-                        - kToolbarHeight;
+    var actualHeight =
+        rawHeight - padding.top - padding.bottom - kToolbarHeight;
     return actualHeight;
   }
 }

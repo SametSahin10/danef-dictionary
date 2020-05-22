@@ -31,31 +31,34 @@ class _SearchFieldState extends State<SearchField> {
   Widget build(BuildContext context) {
     return TypeAheadField(
       textFieldConfiguration: TextFieldConfiguration(
-          controller: widget.textEditingController,
-          focusNode: widget.focusNode,
-          onChanged: (newValue) {
-            setState(() {
-              if (newValue.length == 0) {
-                widget.isClearIconVisible = false;
-              } else {
-                widget.isClearIconVisible = true;
-              }
-            });
-          },
-          textAlign: TextAlign.center,
-          style: DefaultTextStyle.of(context).style.copyWith(fontSize: 20),
-          decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              suffixIcon: Visibility(
-                visible: widget.isClearIconVisible,
-                child: IconButton(
-                  icon: Icon(Icons.cancel),
-                  onPressed: () => widget.textEditingController.clear(),
-                ),
-              ),
-              hintText: tr("search_field_page.search_a_word"))),
-      suggestionsBoxDecoration:
-          SuggestionsBoxDecoration(borderRadius: BorderRadius.circular(18)),
+        controller: widget.textEditingController,
+        focusNode: widget.focusNode,
+        onChanged: (newValue) {
+          setState(() {
+            if (newValue.length == 0) {
+              widget.isClearIconVisible = false;
+            } else {
+              widget.isClearIconVisible = true;
+            }
+          });
+        },
+        textAlign: TextAlign.center,
+        style: DefaultTextStyle.of(context).style.copyWith(fontSize: 20),
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.search),
+          suffixIcon: Visibility(
+            visible: widget.isClearIconVisible,
+            child: IconButton(
+              icon: Icon(Icons.cancel),
+              onPressed: () => widget.textEditingController.clear(),
+            ),
+          ),
+          hintText: tr("search_field_page.search_a_word"),
+        ),
+      ),
+      suggestionsBoxDecoration: SuggestionsBoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+      ),
       suggestionsCallback: (pattern) {
         return pattern.isEmpty ? null : getWords(pattern.toLowerCase());
       },
