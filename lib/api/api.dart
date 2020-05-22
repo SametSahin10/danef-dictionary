@@ -13,11 +13,10 @@ class Api {
   static Future<List<Word>> retrieveWords() async {
     final baseUrl = DotEnv().env['BASE_URL'];
     final url = '$baseUrl${Constants.wordsString}';
-//    final token = await getToken();
-//    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-//    final response = await http.get(url, headers: headers);
-    final response = await http.get(url);
-//    print('response: ${response.body}');
+    final token = await getToken();
+    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+    final response = await http.get(url, headers: headers);
+    print('response: ${response.body}');
     final decodedJson = json.decode(utf8.decode(response.bodyBytes));
     final wordList = WordList.fromJson(decodedJson['data']);
     wordList.words.forEach((word) => print(word.adige));
@@ -32,10 +31,9 @@ class Api {
         '${Constants.turkishString}'
         '$pattern';
     print('retrieving words by pattern. URL: $url');
-//    final token = await getToken();
-//    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-//    final response = await http.get(url, headers: headers);
-    final response = await http.get(url);
+    final token = await getToken();
+    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+    final response = await http.get(url, headers: headers);
     final decodedJson = json.decode(utf8.decode(response.bodyBytes));
     final wordList = WordList.fromJson(decodedJson['data']);
     wordList.words.forEach((word) => print(word.adige));
@@ -47,10 +45,9 @@ class Api {
     final baseUrl = DotEnv().env['BASE_URL'];
     final url =
         '$baseUrl${Constants.wordsString}?${Constants.turkishString}$pattern';
-//    final token = await getToken();
-//    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-//    final response = await http.get(url, headers: headers);
-    final response = await http.get(url);
+    final token = await getToken();
+    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+    final response = await http.get(url, headers: headers);
     final decodedJson = json.decode(utf8.decode(response.bodyBytes));
     final wordList = WordList.fromJson(decodedJson['data']);
     wordList.words.forEach((word) => print(word.turkish));
@@ -61,10 +58,9 @@ class Api {
     final baseUrl = DotEnv().env['BASE_URL'];
     final url =
         '$baseUrl${Constants.wordsString}?${Constants.adigeString}$pattern';
-//    final token = await getToken();
-//    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-//    final response = await http.get(url, headers: headers);
-    final response = await http.get(url);
+    final token = await getToken();
+    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
+    final response = await http.get(url, headers: headers);
     final decodedJson = json.decode(utf8.decode(response.bodyBytes));
     final wordList = WordList.fromJson(decodedJson['data']);
     wordList.words.forEach((word) => print(word.adige));
@@ -84,20 +80,22 @@ class Api {
     print('baseUrl: $baseUrl');
     print('username: $username');
     print('password: $password');
-    final requestContent = {
-      "username": "$username",
+    final requestBody = {
+      "email": "$username",
       "password": "$password",
-      "rememberMe": "true"
     };
     try {
-      final url = baseUrl + Constants.AUTH_STRING;
-      final response = await http.post(url,
-          headers: {HttpHeaders.contentTypeHeader: 'application/json'},
-          body: json.encode(requestContent));
+      final url = baseUrl + Constants.signInScreen;
+      final response = await http.post(
+        url,
+        headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+        body: json.encode(requestBody),
+      );
       if (response.statusCode == HttpStatus.ok) {
         print('Retrieved JWT token succesfully');
         final responseBody = json.decode(response.body);
-        final token = responseBody['id_token'];
+        final token = responseBody['account']['token'];
+        print('token: $token');
         await putTokenIntoSharedPrefs(token);
       } else {
         print('Retrieving JWT token failed');
@@ -116,7 +114,6 @@ class Api {
   }
 
   static Future<String> getTokenFromSharedPrefs() async {
-    print('putting token into Shared Preferences');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('token');
   }

@@ -49,7 +49,6 @@ class _WordTileState extends State<WordTile> {
 
 _addWordToFavorites(Word word) {
   WordDatabase wordDatabase = WordDatabase();
-  wordDatabase.addWord(word);
 }
 
 _deleteFromFavorites(Word word) {
