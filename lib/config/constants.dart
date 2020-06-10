@@ -1,5 +1,5 @@
 class Constants {
-  static const signInScreen = 'user/sign-in';
+  static const signInString = 'user/sign-in';
   static const wordsString = 'words';
   static const turkishString = 'turkish.contains=';
   static const adigeString = 'adige.contains=';

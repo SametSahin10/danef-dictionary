@@ -85,18 +85,21 @@ class Api {
       "password": "$password",
     };
     try {
-      final url = baseUrl + Constants.signInScreen;
+      final url = baseUrl + Constants.signInString;
       final response = await http.post(
         url,
         headers: {HttpHeaders.contentTypeHeader: 'application/json'},
         body: json.encode(requestBody),
       );
       if (response.statusCode == HttpStatus.ok) {
-        print('Retrieved JWT token succesfully');
         final responseBody = json.decode(response.body);
-        final token = responseBody['account']['token'];
-        print('token: $token');
-        await putTokenIntoSharedPrefs(token);
+        final status = responseBody['status'];
+        if (status == true) {
+          print('Retrieved JWT token succesfully');
+          final token = responseBody['account']['token'];
+          print('token: $token');
+          await putTokenIntoSharedPrefs(token);
+        }
       } else {
         print('Retrieving JWT token failed');
       }
