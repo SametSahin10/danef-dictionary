@@ -36,7 +36,7 @@ class _ArchiveState extends State<Archive> {
         if (wordSnapshot.connectionState == ConnectionState.done) {
           var words = wordSnapshot.data[0];
           var favoriteWords = wordSnapshot.data[1];
-          if (wordSnapshot.hasError) {
+          if (wordSnapshot.hasError || words == null) {
             return Center(child: Icon(Icons.error));
           }
           return ListView.separated(

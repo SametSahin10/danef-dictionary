@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'package:danef_dictionary/config/constants.dart';
 import 'package:danef_dictionary/models/word.dart';
-//import 'package:flutter_config/flutter_config.dart';
-//import 'package:dotenv/dotenv.dart' show env;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
+import 'dart:io' as io;
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,13 +12,27 @@ class Api {
     final baseUrl = DotEnv().env['BASE_URL'];
     final url = '$baseUrl${Constants.wordsString}';
     final token = await getToken();
-    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    final response = await http.get(url, headers: headers);
-    print('response: ${response.body}');
-    final decodedJson = json.decode(utf8.decode(response.bodyBytes));
-    final wordList = WordList.fromJson(decodedJson['data']);
-    wordList.words.forEach((word) => print(word.adige));
-    return wordList.words;
+    final headers = {io.HttpHeaders.authorizationHeader: 'Bearer $token'};
+    try {
+      final response = await http.get(url, headers: headers);
+      if (response.statusCode == io.HttpStatus.ok) {
+        print('statusCode: ${response.statusCode}');
+        print('response: ${response.body}');
+        final decodedJson = json.decode(utf8.decode(response.bodyBytes));
+        final wordList = WordList.fromJson(decodedJson['data']);
+        wordList.words.forEach((word) => print(word.adige));
+        return wordList?.words;
+      } else {
+        print("unable to get words");
+        print('statusCode: ${response.statusCode}');
+        print('response: ${response.body}');
+        return null;
+      }
+    } catch (err) {
+      print("exception occured while getting words");
+      print("error: $err");
+      return null;
+    }
   }
 
   static Future<List<Word>> retrieveWordsByPattern(String pattern) async {
@@ -32,12 +44,25 @@ class Api {
         '$pattern';
     print('retrieving words by pattern. URL: $url');
     final token = await getToken();
-    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    final response = await http.get(url, headers: headers);
-    final decodedJson = json.decode(utf8.decode(response.bodyBytes));
-    final wordList = WordList.fromJson(decodedJson['data']);
-    wordList.words.forEach((word) => print(word.adige));
-    return wordList.words;
+    final headers = {io.HttpHeaders.authorizationHeader: 'Bearer $token'};
+    try {
+      final response = await http.get(url, headers: headers);
+      if (response.statusCode == io.HttpStatus.ok) {
+        final decodedJson = json.decode(utf8.decode(response.bodyBytes));
+        final wordList = WordList.fromJson(decodedJson['data']);
+        wordList?.words?.forEach((word) => print(word.adige));
+        return wordList?.words;
+      } else {
+        print("unable to get words by pattern");
+        print('statusCode: ${response.statusCode}');
+        print('response: ${response.body}');
+        return null;
+      }
+    } catch (err) {
+      print("exception occured while getting words");
+      print("error: $err");
+      return null;
+    }
   }
 
   static Future<List<Word>> retrieveTurkishWordsByPattern(
@@ -46,12 +71,25 @@ class Api {
     final url =
         '$baseUrl${Constants.wordsString}?${Constants.turkishString}$pattern';
     final token = await getToken();
-    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    final response = await http.get(url, headers: headers);
-    final decodedJson = json.decode(utf8.decode(response.bodyBytes));
-    final wordList = WordList.fromJson(decodedJson['data']);
-    wordList.words.forEach((word) => print(word.turkish));
-    return wordList.words;
+    final headers = {io.HttpHeaders.authorizationHeader: 'Bearer $token'};
+    try {
+      final response = await http.get(url, headers: headers);
+      if (response.statusCode == io.HttpStatus.ok) {
+        final decodedJson = json.decode(utf8.decode(response.bodyBytes));
+        final wordList = WordList.fromJson(decodedJson['data']);
+        wordList?.words?.forEach((word) => print(word.turkish));
+        return wordList?.words;
+      } else {
+        print("unable to get words by pattern");
+        print('statusCode: ${response.statusCode}');
+        print('response: ${response.body}');
+        return null;
+      }
+    } catch (err) {
+      print("exception occured while getting words");
+      print("error: $err");
+      return null;
+    }
   }
 
   static Future<List<Word>> retrieveAdigeWordsByPattern(String pattern) async {
@@ -59,12 +97,25 @@ class Api {
     final url =
         '$baseUrl${Constants.wordsString}?${Constants.adigeString}$pattern';
     final token = await getToken();
-    final headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    final response = await http.get(url, headers: headers);
-    final decodedJson = json.decode(utf8.decode(response.bodyBytes));
-    final wordList = WordList.fromJson(decodedJson['data']);
-    wordList.words.forEach((word) => print(word.adige));
-    return wordList.words;
+    final headers = {io.HttpHeaders.authorizationHeader: 'Bearer $token'};
+    try {
+      final response = await http.get(url, headers: headers);
+      if (response.statusCode == io.HttpStatus.ok) {
+        final decodedJson = json.decode(utf8.decode(response.bodyBytes));
+        final wordList = WordList.fromJson(decodedJson['data']);
+        wordList?.words?.forEach((word) => print(word.adige));
+        return wordList?.words;
+      } else {
+        print("unable to get words by pattern");
+        print('statusCode: ${response.statusCode}');
+        print('response: ${response.body}');
+        return null;
+      }
+    } catch (err) {
+      print("exception occured while getting words");
+      print("error: $err");
+      return null;
+    }
   }
 
   static Future<String> getToken() async {
@@ -88,10 +139,10 @@ class Api {
       final url = baseUrl + Constants.signInString;
       final response = await http.post(
         url,
-        headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+        headers: {io.HttpHeaders.contentTypeHeader: 'application/json'},
         body: json.encode(requestBody),
       );
-      if (response.statusCode == HttpStatus.ok) {
+      if (response.statusCode == io.HttpStatus.ok) {
         final responseBody = json.decode(response.body);
         final status = responseBody['status'];
         if (status == true) {
