@@ -1,0 +1,63 @@
+name: danef_dictionary
+description: A new Flutter project.
+
+version: 1.0.0+7
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+  flutter_typeahead: ^1.7.0
+  http: ^0.12.0+2
+  json_annotation: ^2.0.0
+  fancy_bottom_navigation:
+    git:
+      url: https://github.com/skquark/fancy_bottom_navigation.git
+  sqflite: ^1.2.0
+  path_provider: ^1.5.1
+  shared_preferences: ^0.5.6+2
+  fluttie: ^0.5.0
+  flutter_dotenv: ^2.1.0
+  flutter_keyboard_visibility: ^0.7.0
+  url_launcher: ^5.4.2
+  share: ^0.6.3+6
+  intl: ^0.16.0
+  easy_localization: ^1.4.1
+  page_transition: ^1.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  test: ^1.5.1
+  build_runner: ^1.0.0
+  json_serializable: ^2.0.0
+  flutter_launcher_icons: "^0.7.3"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/icons/ic_launcher.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - resources/langs/tr-TR.json
+    - resources/langs/en-EN.json
+    - assets/
+    - assets/images/
+    - assets/fonts/
+    - assets/animations/
+    - .env
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Light.ttf
+    - family: DidactGothic
+      fonts:
+        - asset: assets/fonts/DidactGothic-Regular.ttf
