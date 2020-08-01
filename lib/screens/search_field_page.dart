@@ -1,16 +1,16 @@
-import 'package:danef_dictionary/screens/home_page.dart';
+import 'package:danef_dictionary/screens/home_screen.dart';
 import 'package:danef_dictionary/widgets/meaning_widget.dart';
 import 'package:danef_dictionary/widgets/search_widget.dart';
 import 'package:easy_localization/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-class SearchFieldPage extends StatefulWidget {
+class SearchFieldScreen extends StatefulWidget {
   @override
-  _SearchFieldPageState createState() => _SearchFieldPageState();
+  _SearchFieldScreenState createState() => _SearchFieldScreenState();
 }
 
-class _SearchFieldPageState extends State<SearchFieldPage>
+class _SearchFieldScreenState extends State<SearchFieldScreen>
     with TickerProviderStateMixin {
   final _textEditingController = TextEditingController();
   bool _isClearIconVisible = false;

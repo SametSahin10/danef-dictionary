@@ -2,7 +2,7 @@ import 'package:danef_dictionary/api/api.dart';
 import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
-import 'package:danef_dictionary/screens/home_page.dart';
+import 'package:danef_dictionary/screens/home_screen.dart';
 import 'package:danef_dictionary/widgets/word_tile.dart';
 import 'package:easy_localization/public.dart';
 import 'package:flutter/material.dart';

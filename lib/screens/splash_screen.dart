@@ -1,4 +1,4 @@
-import 'package:danef_dictionary/screens/home_page.dart';
+import 'package:danef_dictionary/screens/home_screen.dart';
 import 'package:danef_dictionary/utils/navigation.dart';
 import 'package:danef_dictionary/utils/utils.dart';
 import 'package:easy_localization/public.dart';
@@ -47,7 +47,11 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Center(
                 child: Text(
                   tr("title"),
-                  style: TextStyle(fontSize: 36, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 36,
+                    color: Colors.white,
+                    fontFamily: "DidactGothic",
+                  ),
                 ),
               ),
             ),
