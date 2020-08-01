@@ -4,7 +4,6 @@ import 'package:danef_dictionary/widgets/theme_inherited_widget.dart';
 import 'package:easy_localization/public.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttie/fluttie.dart';
 import 'package:lottie/lottie.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -37,7 +36,7 @@ class _PreferencesState extends State<Preferences> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _buildListView(),
+        SettingsBody(),
         Container(
           height: MediaQuery.of(context).size.height * 0.5,
           child: Stack(
@@ -45,23 +44,20 @@ class _PreferencesState extends State<Preferences> {
             alignment: Alignment.center,
             children: <Widget>[
               Lottie.asset(Assets.developer_working_anim_path),
-              Positioned(
-                bottom: 36,
-                child: GestureDetector(
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        tr("settings.developer_desc_text"),
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'sametsahin.dev',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
-                  ),
-                  onTap: _launchDeveloperPortfolio,
+              GestureDetector(
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      tr("settings.developer_desc_text"),
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    Text(
+                      'sametsahin.dev',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
                 ),
+                onTap: _launchDeveloperPortfolio,
               )
             ],
           ),
@@ -69,8 +65,11 @@ class _PreferencesState extends State<Preferences> {
       ],
     );
   }
-  
-  Widget _buildListView() {
+}
+
+class SettingsBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.35,
       child: ListView(
@@ -81,8 +80,8 @@ class _PreferencesState extends State<Preferences> {
             Image.asset(Assets.moon, width: 20, height: 20),
             title: Text(
               ThemeSwitcher.of(context).isDarkModeOn ?
-                tr("settings.turn_on_the_lights") :
-                tr("settings.turn_off_the_lights"),
+              tr("settings.turn_on_the_lights") :
+              tr("settings.turn_off_the_lights"),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () => ThemeSwitcher.of(context).switchDarkMode(),
@@ -106,7 +105,7 @@ class _PreferencesState extends State<Preferences> {
               Colors.white : Colors.black,
             ),
             title: Text(
-            tr("settings.give_feedback"),
+              tr("settings.give_feedback"),
               style: TextStyle(fontSize: 20),
             ),
             onTap: _launchMailClient,
@@ -128,6 +127,7 @@ class _PreferencesState extends State<Preferences> {
     );
   }
 }
+
 
 _launchShare() async {
   const url = Constants.googlePlayUrl;
