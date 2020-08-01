@@ -1,4 +1,5 @@
 import 'package:danef_dictionary/screens/home_page.dart';
+import 'package:danef_dictionary/utils/navigation.dart';
 import 'package:danef_dictionary/utils/utils.dart';
 import 'package:easy_localization/public.dart';
 import 'package:flutter/material.dart';
@@ -81,18 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     });
     await Future.delayed(Duration(milliseconds: 1500)).then((_) {
-      _pushHomePage(context);
+      pushHomeScreen(context);
     });
   }
-}
-
-_pushHomePage(BuildContext context) {
-  Navigator.of(context).push(
-    PageTransition(
-      child: HomePage(),
-      type: PageTransitionType.rightToLeftWithFade,
-      duration: Duration(milliseconds: 800),
-      curve: Curves.bounceOut,
-    ),
-  );
 }
