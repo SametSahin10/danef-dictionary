@@ -30,10 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () {
-                pushSettingsScreen(context);
-              }),
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              pushSettingsScreen(context);
+            },
+          ),
         ],
       ),
       body: tabs[_currentIndex],
@@ -43,10 +44,18 @@ class _HomeScreenState extends State<HomeScreen> {
         circleHeight: 50,
         initialSelection: 1,
         tabs: [
-          TabData(iconData: Icons.list, title: tr('bottom_nav_bar.word_list')),
-          TabData(iconData: Icons.search, title: tr('bottom_nav_bar.search')),
           TabData(
-              iconData: Icons.favorite, title: tr('bottom_nav_bar.favourites')),
+            iconData: Icons.list,
+            title: tr('bottom_nav_bar.word_list'),
+          ),
+          TabData(
+            iconData: Icons.search,
+            title: tr('bottom_nav_bar.search'),
+          ),
+          TabData(
+            iconData: Icons.favorite,
+            title: tr('bottom_nav_bar.favourites'),
+          ),
         ],
         onTabChangedListener: (position) {
           setState(() {
