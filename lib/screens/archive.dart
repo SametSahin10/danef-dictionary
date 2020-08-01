@@ -2,7 +2,9 @@ import 'package:danef_dictionary/api/api.dart';
 import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
+import 'package:danef_dictionary/screens/home_page.dart';
 import 'package:danef_dictionary/widgets/word_tile.dart';
+import 'package:easy_localization/public.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -24,16 +26,35 @@ class _ArchiveState extends State<Archive> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     wordDatabase = WordDatabase();
     favoriteWords = wordDatabase.getWords();
     return FutureBuilder<List<List<Word>>>(
       future: Future.wait([wordData, favoriteWords]),
       builder: (context, wordSnapshot) {
         if (wordSnapshot.connectionState == ConnectionState.done) {
-          var words = wordSnapshot.data[0];
-          var favoriteWords = wordSnapshot.data[1];
+          final words = wordSnapshot.data[0];
+          final favoriteWords = wordSnapshot.data[1];
           if (wordSnapshot.hasError || words == null) {
             return Center(child: Icon(Icons.error));
+          }
+          if (words.isEmpty) {
+            return Center(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    width: screenWidth * 0.65,
+                    height: screenHeight * 0.65,
+                    child: Lottie.asset(Assets.couldNotFindWords),
+                  ),
+                  Text(
+                    tr("archive.could_not_find_words"),
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ],
+              ),
+            );
           }
           return ListView.separated(
               separatorBuilder: (_, index) {
@@ -46,17 +67,10 @@ class _ArchiveState extends State<Archive> {
               padding: EdgeInsets.all(8),
               itemCount: words.length,
               itemBuilder: (context, index) {
-                return _isInFavorites(favoriteWords, words[index]) ?
-                WordTile(
-                    words[index],
-                    isFavourite: true
-                ) :
-                WordTile(
-                    words[index],
-                    isFavourite: false
-                );
-              }
-          );
+                return _isInFavorites(favoriteWords, words[index])
+                    ? WordTile(words[index], isFavourite: true)
+                    : WordTile(words[index], isFavourite: false);
+              });
         } else {
           return Center(
             child: Lottie.asset(Assets.loading_words_anim_path),
@@ -66,7 +80,7 @@ class _ArchiveState extends State<Archive> {
     );
   }
 
-   _isInFavorites(List<Word> words, Word word) {
+  _isInFavorites(List<Word> words, Word word) {
     if (words == null) {
       return false;
     }
@@ -78,4 +92,3 @@ class _ArchiveState extends State<Archive> {
     return false;
   }
 }
-

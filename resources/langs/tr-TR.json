@@ -8,6 +8,9 @@
     "search": "Ara",
     "favourites": "Favoriler"
   },
+  "archive": {
+    "could_not_find_words": "Kelimeler bulunamadı"
+  },
   "search_field_page": {
     "search_again": "Tekrar ara",
     "search_a_word": "Kelime ara...",

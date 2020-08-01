@@ -8,6 +8,9 @@
     "search": "Search",
     "favourites": "Favourites"
   },
+  "archive": {
+    "could_not_find_words": "Could not find words"
+  },
   "search_field_page": {
     "search_again": "Search again",
     "search_a_word": "Search a word...",
