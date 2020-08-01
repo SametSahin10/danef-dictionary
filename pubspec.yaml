@@ -9,8 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^0.1.2
+  lottie: ^0.5.1
   flutter_typeahead: ^1.7.0
   http: ^0.12.0+2
   json_annotation: ^2.0.0
@@ -20,7 +19,6 @@ dependencies:
   sqflite: ^1.2.0
   path_provider: ^1.5.1
   shared_preferences: ^0.5.6+2
-  fluttie: ^0.5.0
   flutter_dotenv: ^2.1.0
   flutter_keyboard_visibility: ^0.7.0
   url_launcher: ^5.4.2

@@ -5,6 +5,7 @@ import 'package:easy_localization/public.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttie/fluttie.dart';
+import 'package:lottie/lottie.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,12 +28,8 @@ class Preferences extends StatefulWidget {
 }
 
 class _PreferencesState extends State<Preferences> {
-  FluttieAnimationController _developerWorkingAnimation;
-  bool _animationReady = false;
-  
   @override
   void initState() {
-    _prepareAnimation();
     super.initState();
   }
   
@@ -47,20 +44,7 @@ class _PreferencesState extends State<Preferences> {
             fit: StackFit.expand,
             alignment: Alignment.center,
             children: <Widget>[
-              _animationReady ? Align(
-                alignment: Alignment.center,
-                child: AnimatedOpacity(
-                  opacity: _animationReady ? 1.0 : 0.0,
-                  duration: Duration(seconds: 1),
-                  child: FluttieAnimation(
-                      _developerWorkingAnimation,
-                      size: Size(
-                          double.infinity,
-                          MediaQuery.of(context).size.height * 0.5
-                      )
-                  ),
-                ),
-              ) : Align(alignment: Alignment.center, child: Container()),
+              Lottie.asset(Assets.developer_working_anim_path),
               Positioned(
                 bottom: 36,
                 child: GestureDetector(
@@ -143,24 +127,6 @@ class _PreferencesState extends State<Preferences> {
       ),
     );
   }
-
-  _prepareAnimation() async {
-    final instance = Fluttie();
-    final developerWorkingComposition =
-      await instance.loadAnimationFromAsset(Assets.developer_working_anim_path);
-    _developerWorkingAnimation = await instance.prepareAnimation(
-      developerWorkingComposition,
-      repeatMode: RepeatMode.START_OVER,
-      repeatCount: RepeatCount.infinite()
-    );
-    if (mounted) {
-      setState(() {
-        _animationReady = true;
-        _developerWorkingAnimation.start();
-      });
-    }
-  }
-
 }
 
 _launchShare() async {
