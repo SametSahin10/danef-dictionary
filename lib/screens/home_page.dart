@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Settings())
+                MaterialPageRoute(builder: (context) => SettingsScreen())
               );
             }
           ),
