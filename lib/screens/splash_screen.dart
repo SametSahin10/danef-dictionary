@@ -15,8 +15,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-//    WidgetsBinding.instance
-//        .addPostFrameCallback((_) => _showSponsorText());
     _showSponsorText();
   }
 
@@ -36,9 +34,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Text(
                   'ADDER',
                   style: TextStyle(
-                      fontSize: 32,
-                      fontFamily: 'OpenSans',
-                      color: Colors.white),
+                    fontSize: 32,
+                    fontFamily: 'OpenSans',
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -46,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
               flex: 4,
               child: Center(
                 child: Text(
-                  'Danef Dictionary',
+                  tr("title"),
                   style: TextStyle(fontSize: 36, color: Colors.white),
                 ),
               ),
