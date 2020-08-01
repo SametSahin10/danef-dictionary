@@ -1,7 +1,7 @@
 import 'package:danef_dictionary/screens/home_screen.dart';
 import 'package:danef_dictionary/widgets/meaning_widget.dart';
 import 'package:danef_dictionary/widgets/search_widget.dart';
-import 'package:easy_localization/public.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
@@ -49,13 +49,20 @@ class _SearchFieldScreenState extends State<SearchFieldScreen>
     meaningAnimFromRight = Tween(begin: 400.0, end: 0.0)
         .chain(CurveTween(curve: Curves.fastLinearToSlowEaseIn))
         .animate(meaningAnimFromRightController);
-    KeyboardVisibilityNotification().addNewListener(onChange: (bool visible) {
+    KeyboardVisibility.onChange.listen((visible) {
       if (!visible) {
         if (!_isMeaningVisible) {
           searchFieldAnimController.reverse();
         }
       }
     });
+//    KeyboardVisibilityNotification().addNewListener(onChange: (bool visible) {
+//      if (!visible) {
+//        if (!_isMeaningVisible) {
+//          searchFieldAnimController.reverse();
+//        }
+//      }
+//    });
     super.initState();
   }
 

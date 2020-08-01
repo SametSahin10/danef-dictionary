@@ -1,7 +1,7 @@
 import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/config/constants.dart';
 import 'package:danef_dictionary/widgets/theme_inherited_widget.dart';
-import 'package:easy_localization/public.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';

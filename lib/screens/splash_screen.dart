@@ -1,9 +1,7 @@
-import 'package:danef_dictionary/screens/home_screen.dart';
 import 'package:danef_dictionary/utils/navigation.dart';
 import 'package:danef_dictionary/utils/utils.dart';
-import 'package:easy_localization/public.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
