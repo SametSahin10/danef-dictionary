@@ -35,9 +35,9 @@ class _WordTileState extends State<WordTile> {
         onPressed: () {
           setState(() {
             if (widget.isFavourite) {
-              _deleteFromFavorites(widget.word);
+              deleteFromFavorites(widget.word);
             } else {
-              _addWordToFavorites(widget.word);
+              addWordToFavorites(widget.word);
             }
             widget.isFavourite = !widget.isFavourite;
           });
@@ -47,11 +47,12 @@ class _WordTileState extends State<WordTile> {
   }
 }
 
-_addWordToFavorites(Word word) {
+Future<Word> addWordToFavorites(Word word) {
   WordDatabase wordDatabase = WordDatabase();
+  return wordDatabase.addWord(word);
 }
 
-_deleteFromFavorites(Word word) {
+Future deleteFromFavorites(Word word) {
   WordDatabase wordDatabase = WordDatabase();
-  wordDatabase.deleteWord(word.wordId);
+  return wordDatabase.deleteWord(word.wordId);
 }

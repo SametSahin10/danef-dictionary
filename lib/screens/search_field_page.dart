@@ -1,16 +1,16 @@
-import 'package:danef_dictionary/screens/home_page.dart';
+import 'package:danef_dictionary/screens/home_screen.dart';
 import 'package:danef_dictionary/widgets/meaning_widget.dart';
 import 'package:danef_dictionary/widgets/search_widget.dart';
-import 'package:easy_localization/public.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-class SearchFieldPage extends StatefulWidget {
+class SearchFieldScreen extends StatefulWidget {
   @override
-  _SearchFieldPageState createState() => _SearchFieldPageState();
+  _SearchFieldScreenState createState() => _SearchFieldScreenState();
 }
 
-class _SearchFieldPageState extends State<SearchFieldPage>
+class _SearchFieldScreenState extends State<SearchFieldScreen>
     with TickerProviderStateMixin {
   final _textEditingController = TextEditingController();
   bool _isClearIconVisible = false;
@@ -49,7 +49,7 @@ class _SearchFieldPageState extends State<SearchFieldPage>
     meaningAnimFromRight = Tween(begin: 400.0, end: 0.0)
         .chain(CurveTween(curve: Curves.fastLinearToSlowEaseIn))
         .animate(meaningAnimFromRightController);
-    KeyboardVisibilityNotification().addNewListener(onChange: (bool visible) {
+    KeyboardVisibility.onChange.listen((visible) {
       if (!visible) {
         if (!_isMeaningVisible) {
           searchFieldAnimController.reverse();
@@ -112,20 +112,22 @@ class _SearchFieldPageState extends State<SearchFieldPage>
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: FlatButton.icon(
-                  padding: EdgeInsets.all(10),
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.green,
-                  ),
-                  label: Text(
-                    tr("Search again"),
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.green, width: 0.8),
-                      borderRadius: BorderRadius.circular(12)),
-                  textColor: Colors.green,
-                  onPressed: _focusOnSearchField),
+                padding: EdgeInsets.all(8),
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.green,
+                ),
+                label: Text(
+                  tr("search_field_page.search_again"),
+                  style: TextStyle(fontSize: 18),
+                ),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.green, width: 0.8),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                textColor: Colors.green,
+                onPressed: _focusOnSearchField,
+              ),
             ),
           ),
         )

@@ -8,11 +8,17 @@
     "search": "Ara",
     "favourites": "Favoriler"
   },
+  "archive": {
+    "could_not_find_words": "Kelime bulunamadı"
+  },
   "search_field_page": {
     "search_again": "Tekrar ara",
     "search_a_word": "Kelime ara...",
     "no_meaning_desc_text": "Karşılık bulunamadı.",
     "no_match_found_desc_text": "Kelime bulunamadı."
+  },
+  "favourite_words": {
+    "removing_word": "Kelime silindi"
   },
   "settings" : {
     "app_bar_title": "Ayarlar",
@@ -21,6 +27,7 @@
     "share": "Paylaş",
     "give_feedback": "Geri bildirim",
     "rate_the_app": "Değerlendir",
+    "attributions": "Atıflar",
     "developer_desc_text": "Geliştirici: Samet Şahin"
   }
 }

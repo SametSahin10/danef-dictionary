@@ -8,11 +8,17 @@
     "search": "Search",
     "favourites": "Favourites"
   },
+  "archive": {
+    "could_not_find_words": "Could not find words"
+  },
   "search_field_page": {
     "search_again": "Search again",
     "search_a_word": "Search a word...",
     "no_meaning_desc_text": "Could not find meaning.",
     "no_match_found_desc_text": "No items found"
+  },
+  "favourite_words": {
+    "removing_word": "Removed word"
   },
   "settings": {
     "app_bar_title": "Settings",
@@ -21,6 +27,7 @@
     "share": "Share",
     "give_feedback": "Give feedback",
     "rate_the_app": "Rate the app",
+    "attributions": "Attributions",
     "developer_desc_text": "Developer: Samet Şahin"
   }
 }

@@ -1,8 +1,7 @@
-import 'package:danef_dictionary/screens/home_page.dart';
+import 'package:danef_dictionary/utils/navigation.dart';
 import 'package:danef_dictionary/utils/utils.dart';
-import 'package:easy_localization/public.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -14,10 +13,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    super.initState();
-//    WidgetsBinding.instance
-//        .addPostFrameCallback((_) => _showSponsorText());
     _showSponsorText();
+    super.initState();
   }
 
   @override
@@ -36,9 +33,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Text(
                   'ADDER',
                   style: TextStyle(
-                      fontSize: 32,
-                      fontFamily: 'OpenSans',
-                      color: Colors.white),
+                    fontSize: 32,
+                    fontFamily: 'OpenSans',
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -46,8 +44,12 @@ class _SplashScreenState extends State<SplashScreen> {
               flex: 4,
               child: Center(
                 child: Text(
-                  'Danef Dictionary',
-                  style: TextStyle(fontSize: 36, color: Colors.white),
+                  tr("title"),
+                  style: TextStyle(
+                    fontSize: 36,
+                    color: Colors.white,
+                    fontFamily: "DidactGothic",
+                  ),
                 ),
               ),
             ),
@@ -82,18 +84,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     });
     await Future.delayed(Duration(milliseconds: 1500)).then((_) {
-      _pushHomePage(context);
+      pushHomeScreen(context);
     });
   }
-}
-
-_pushHomePage(BuildContext context) {
-  Navigator.of(context).push(
-    PageTransition(
-      child: HomePage(),
-      type: PageTransitionType.rightToLeftWithFade,
-      duration: Duration(milliseconds: 800),
-      curve: Curves.bounceOut,
-    ),
-  );
 }
