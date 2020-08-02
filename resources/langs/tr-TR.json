@@ -17,6 +17,9 @@
     "no_meaning_desc_text": "Karşılık bulunamadı.",
     "no_match_found_desc_text": "Kelime bulunamadı."
   },
+  "favourite_words": {
+    "removing_word": "Kelime silindi"
+  },
   "settings" : {
     "app_bar_title": "Ayarlar",
     "turn_on_the_lights": "Işıkları aç",

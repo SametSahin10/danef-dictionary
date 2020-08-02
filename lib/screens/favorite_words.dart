@@ -1,6 +1,7 @@
 import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
+import 'package:easy_localization/public.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -14,7 +15,7 @@ class _FavoriteWordsState extends State<FavoriteWords> {
 
   @override
   void initState() {
-    var client = WordDatabase();
+    final client = WordDatabase();
     words = client.getWords();
     super.initState();
   }
@@ -58,9 +59,11 @@ class _FavoriteWordsState extends State<FavoriteWords> {
         return Dismissible(
           background: Container(
             decoration: ShapeDecoration(
-                color: Colors.green,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8))),
+              color: Colors.green,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
           ),
           key: Key(words[index].id.toString()),
           onDismissed: (direction) {
@@ -102,12 +105,19 @@ class _FavoriteWordsState extends State<FavoriteWords> {
 }
 
 _showSnackBar(BuildContext context, Word removedWord) {
-  Scaffold.of(context).showSnackBar(SnackBar(
+  Scaffold.of(context).showSnackBar(
+    SnackBar(
       backgroundColor: Colors.green,
       content: Text(
-        'Removed ${removedWord.adige}',
-        style: TextStyle(color: Colors.white, fontSize: 20),
-      )));
+        tr("favourite_words.removing_word") + ": " + removedWord.adige,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontFamily: "DidactGothic",
+        ),
+      ),
+    ),
+  );
 }
 
 _deleteFromFavorites(Word word) {

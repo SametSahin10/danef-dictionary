@@ -50,7 +50,7 @@ class WordDatabase {
   }
 
   Future<Word> addWord(Word word) async {
-    var client = await db;
+    final client = await db;
     word.id = await client.insert(tableWords, word.toMap());
     return word;
   }

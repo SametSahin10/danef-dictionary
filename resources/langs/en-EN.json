@@ -17,6 +17,9 @@
     "no_meaning_desc_text": "Could not find meaning.",
     "no_match_found_desc_text": "No items found"
   },
+  "favourite_words": {
+    "removing_word": "Removed word"
+  },
   "settings": {
     "app_bar_title": "Settings",
     "turn_on_the_lights": "Turn on the lights",

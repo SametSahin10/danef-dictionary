@@ -13,13 +13,15 @@ class Archive extends StatefulWidget {
 }
 
 class _ArchiveState extends State<Archive> {
-  Future<List<Word>> wordData;
+  Future<List<Word>> wordsFuture;
+  Future<List<Word>> favoriteWordsFuture;
   WordDatabase wordDatabase;
-  Future<List<Word>> favoriteWords;
 
   @override
   void initState() {
-    wordData = Api.retrieveWords();
+    wordsFuture = Api.retrieveWords();
+    wordDatabase = WordDatabase();
+    favoriteWordsFuture = wordDatabase.getWords();
     super.initState();
   }
 
@@ -27,10 +29,8 @@ class _ArchiveState extends State<Archive> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    wordDatabase = WordDatabase();
-    favoriteWords = wordDatabase.getWords();
     return FutureBuilder<List<List<Word>>>(
-      future: Future.wait([wordData, favoriteWords]),
+      future: Future.wait([wordsFuture, favoriteWordsFuture]),
       builder: (context, wordSnapshot) {
         if (wordSnapshot.connectionState == ConnectionState.done) {
           final words = wordSnapshot.data[0];
@@ -56,20 +56,21 @@ class _ArchiveState extends State<Archive> {
             );
           }
           return ListView.separated(
-              separatorBuilder: (_, index) {
-                return Divider(
-                  indent: 8,
-                  endIndent: 8,
-                  color: Colors.black26,
-                );
-              },
-              padding: EdgeInsets.all(8),
-              itemCount: words.length,
-              itemBuilder: (context, index) {
-                return _isInFavorites(favoriteWords, words[index])
-                    ? WordTile(words[index], isFavourite: true)
-                    : WordTile(words[index], isFavourite: false);
-              });
+            separatorBuilder: (_, index) {
+              return Divider(
+                indent: 8,
+                endIndent: 8,
+                color: Colors.black26,
+              );
+            },
+            padding: EdgeInsets.all(8),
+            itemCount: words.length,
+            itemBuilder: (context, index) {
+              return _isInFavorites(favoriteWords, words[index])
+                  ? WordTile(words[index], isFavourite: true)
+                  : WordTile(words[index], isFavourite: false);
+            },
+          );
         } else {
           return Center(
             child: Lottie.asset(Assets.loading_words_anim_path),
