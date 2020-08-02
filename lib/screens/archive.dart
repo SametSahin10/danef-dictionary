@@ -3,8 +3,9 @@ import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/data/word_database.dart';
 import 'package:danef_dictionary/models/word.dart';
 import 'package:danef_dictionary/widgets/word_tile.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttie/fluttie.dart';
+import 'package:lottie/lottie.dart';
 
 class Archive extends StatefulWidget {
   @override
@@ -12,87 +13,74 @@ class Archive extends StatefulWidget {
 }
 
 class _ArchiveState extends State<Archive> {
-  Future<List<Word>> wordData;
+  Future<List<Word>> wordsFuture;
+  Future<List<Word>> favoriteWordsFuture;
   WordDatabase wordDatabase;
-  Future<List<Word>> favoriteWords;
-
-  FluttieAnimationController _loadingWordsAnimation;
-  bool _animationReady = false;
 
   @override
   void initState() {
-    _prepareAnimation();
-    wordData = Api.retrieveWords();
+    wordsFuture = Api.retrieveWords();
+    wordDatabase = WordDatabase();
+    favoriteWordsFuture = wordDatabase.getWords();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    wordDatabase = WordDatabase();
-    favoriteWords = wordDatabase.getWords();
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return FutureBuilder<List<List<Word>>>(
-      future: Future.wait([wordData, favoriteWords]),
+      future: Future.wait([wordsFuture, favoriteWordsFuture]),
       builder: (context, wordSnapshot) {
         if (wordSnapshot.connectionState == ConnectionState.done) {
-          var words = wordSnapshot.data[0];
-          var favoriteWords = wordSnapshot.data[1];
+          final words = wordSnapshot.data[0];
+          final favoriteWords = wordSnapshot.data[1];
           if (wordSnapshot.hasError || words == null) {
             return Center(child: Icon(Icons.error));
           }
+          if (words.isEmpty) {
+            return Center(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    width: screenWidth * 0.65,
+                    height: screenHeight * 0.65,
+                    child: Lottie.asset(Assets.couldNotFindWords),
+                  ),
+                  Text(
+                    tr("archive.could_not_find_words"),
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ],
+              ),
+            );
+          }
           return ListView.separated(
-              separatorBuilder: (_, index) {
-                return Divider(
-                  indent: 8,
-                  endIndent: 8,
-                  color: Colors.black26,
-                );
-              },
-              padding: EdgeInsets.all(8),
-              itemCount: words.length,
-              itemBuilder: (context, index) {
-                return _isInFavorites(favoriteWords, words[index]) ?
-                WordTile(
-                    words[index],
-                    isFavourite: true
-                ) :
-                WordTile(
-                    words[index],
-                    isFavourite: false
-                );
-              }
+            separatorBuilder: (_, index) {
+              return Divider(
+                indent: 8,
+                endIndent: 8,
+                color: Colors.black26,
+              );
+            },
+            padding: EdgeInsets.all(8),
+            itemCount: words.length,
+            itemBuilder: (context, index) {
+              return _isInFavorites(favoriteWords, words[index])
+                  ? WordTile(words[index], isFavourite: true)
+                  : WordTile(words[index], isFavourite: false);
+            },
           );
         } else {
           return Center(
-            child: _animationReady ?
-                      FluttieAnimation(
-                        _loadingWordsAnimation,
-                        size: Size(350, 350),
-                      ) :
-                      Container()
+            child: Lottie.asset(Assets.loading_words_anim_path),
           );
         }
       },
     );
   }
 
-  _prepareAnimation() async {
-    final instance = Fluttie();
-    final loadingWordsComposition =
-    await instance.loadAnimationFromAsset(Assets.loading_words_anim_path);
-    _loadingWordsAnimation = await instance.prepareAnimation(
-      loadingWordsComposition,
-      repeatMode: RepeatMode.START_OVER,
-      repeatCount: RepeatCount.infinite()
-    );
-    if (mounted) {
-      setState(() {
-        _animationReady = true;
-        _loadingWordsAnimation.start();
-      });
-    }
-  }
-
-   _isInFavorites(List<Word> words, Word word) {
+  _isInFavorites(List<Word> words, Word word) {
     if (words == null) {
       return false;
     }
@@ -104,4 +92,3 @@ class _ArchiveState extends State<Archive> {
     return false;
   }
 }
-

@@ -12,13 +12,14 @@ class SearchField extends StatefulWidget {
   Function showMeaning;
   Function setWordAndMeaning;
 
-  SearchField(
-      {this.textEditingController,
-      this.focusNode,
-      this.isClearIconVisible,
-      this.clearMeaning,
-      this.showMeaning,
-      this.setWordAndMeaning});
+  SearchField({
+    this.textEditingController,
+    this.focusNode,
+    this.isClearIconVisible,
+    this.clearMeaning,
+    this.showMeaning,
+    this.setWordAndMeaning,
+  });
 
   @override
   _SearchFieldState createState() => _SearchFieldState();
@@ -62,7 +63,7 @@ class _SearchFieldState extends State<SearchField> {
       suggestionsCallback: (pattern) {
         return pattern.isEmpty ? null : getWords(pattern.toLowerCase());
       },
-      noItemsFoundBuilder: (_) => _buildNoItemsFoundWidget(),
+      noItemsFoundBuilder: (_) => buildNoItemsFoundWidget(),
       keepSuggestionsOnLoading: false,
       itemBuilder: (context, suggestion) {
         return ListTile(
@@ -78,7 +79,7 @@ class _SearchFieldState extends State<SearchField> {
         );
       },
       onSuggestionSelected: (suggestion) {
-        widget.setWordAndMeaning(suggestion, getMeaning(suggestion));
+        widget.setWordAndMeaning(suggestion, _getMeaning(suggestion));
         widget.clearMeaning();
         widget.showMeaning();
       },
@@ -95,24 +96,24 @@ class _SearchFieldState extends State<SearchField> {
 //    wordsToSuggest.addAll(matchingAdigeWords);
     wordsToSuggest.addAll(matchingWords);
     List<String> wordsAsStrings = new List();
-//    matchingTurkishWords.forEach(
-//      (matchingTurkishWord) {
-//        wordsAsStrings.add(matchingTurkishWord.turkish);
-//      }
-//    );
-//    matchingAdigeWords.forEach(
-//      (matchingAdigeWord) {
-//        wordsAsStrings.add(matchingAdigeWord.adige);
-//      }
-//    );
     matchingWords.forEach((matchingWord) {
-      wordsAsStrings.add(matchingWord.adige);
-      wordsAsStrings.add(matchingWord.turkish);
+      // Words returned by the API are Word objects.
+      // Word objects include both adige and the turkish.
+      // It is certain that either adige or turkish will include the pattern.
+      // Add adige or turkish into suggestions only if it includes the pattern.
+      // Below logic will prevent showing a String which does not
+      // include the pattern.
+      if (matchingWord.adige.contains(pattern)) {
+        wordsAsStrings.add(matchingWord.adige);
+      }
+      if (matchingWord.turkish.contains(pattern)) {
+        wordsAsStrings.add(matchingWord.turkish);
+      }
     });
     return wordsAsStrings;
   }
 
-  getMeaning(String word) {
+  _getMeaning(String word) {
     for (final wordToSuggest in wordsToSuggest) {
       if (wordToSuggest.adige == word) {
         return wordToSuggest.turkish;
@@ -125,7 +126,7 @@ class _SearchFieldState extends State<SearchField> {
   }
 }
 
-Widget _buildNoItemsFoundWidget() {
+Widget buildNoItemsFoundWidget() {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(

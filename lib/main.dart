@@ -1,5 +1,5 @@
 import 'package:danef_dictionary/config/themes.dart';
-import 'package:danef_dictionary/screens/home_page.dart';
+import 'package:danef_dictionary/screens/home_screen.dart';
 import 'package:danef_dictionary/screens/splash_screen.dart';
 import 'package:danef_dictionary/widgets/theme_inherited_widget.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,9 +12,10 @@ void main() async {
   await DotEnv().load('.env');
   _determineAppTheme().then((isDarkModeOn) {
     runApp(EasyLocalization(
-        child: MyApp(
-      isDarkModeOn: isDarkModeOn,
-    )));
+      child: MyApp(
+        isDarkModeOn: isDarkModeOn,
+      ),
+    ));
   });
 }
 
