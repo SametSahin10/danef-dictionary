@@ -112,20 +112,22 @@ class _SearchFieldScreenState extends State<SearchFieldScreen>
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: FlatButton.icon(
-                  padding: EdgeInsets.all(10),
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.green,
-                  ),
-                  label: Text(
-                    tr("Search again"),
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.green, width: 0.8),
-                      borderRadius: BorderRadius.circular(12)),
-                  textColor: Colors.green,
-                  onPressed: _focusOnSearchField),
+                padding: EdgeInsets.all(8),
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.green,
+                ),
+                label: Text(
+                  tr("search_field_page.search_again"),
+                  style: TextStyle(fontSize: 18),
+                ),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.green, width: 0.8),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                textColor: Colors.green,
+                onPressed: _focusOnSearchField,
+              ),
             ),
           ),
         )
