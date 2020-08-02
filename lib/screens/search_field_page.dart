@@ -56,13 +56,6 @@ class _SearchFieldScreenState extends State<SearchFieldScreen>
         }
       }
     });
-//    KeyboardVisibilityNotification().addNewListener(onChange: (bool visible) {
-//      if (!visible) {
-//        if (!_isMeaningVisible) {
-//          searchFieldAnimController.reverse();
-//        }
-//      }
-//    });
     super.initState();
   }
 
