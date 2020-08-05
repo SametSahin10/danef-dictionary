@@ -15,7 +15,9 @@ class Api {
   }) async {
     final baseUrl = DotEnv().env['BASE_URL'];
     final url =
-        "$baseUrl${Constants.wordsString}?${Constants.offsetString}=$offset&${Constants.limitString}=$limit";
+        "$baseUrl${Constants.wordsString}?"
+        "${Constants.offsetString}=$offset&"
+        "${Constants.limitString}=$limit";
     final token = await getToken();
     final headers = {io.HttpHeaders.authorizationHeader: 'Bearer $token'};
     try {
@@ -40,13 +42,19 @@ class Api {
     }
   }
 
-  static Future<List<Word>> retrieveWordsByPattern(String pattern) async {
+  static Future<List<Word>> retrieveWordsByPattern({
+    String pattern,
+    @required String offset,
+    @required String limit,
+  }) async {
     final baseUrl = DotEnv().env['BASE_URL'];
     final url = '$baseUrl${Constants.wordsString}'
         '?${Constants.adigeString}'
         '$pattern&'
         '${Constants.turkishString}'
-        '$pattern';
+        '$pattern&'
+        '${Constants.offsetString}=$offset&'
+        '${Constants.limitString}=$limit';
     print('retrieving words by pattern. URL: $url');
     final token = await getToken();
     final headers = {io.HttpHeaders.authorizationHeader: 'Bearer $token'};
