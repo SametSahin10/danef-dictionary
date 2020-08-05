@@ -15,7 +15,6 @@ class WordTile extends StatefulWidget {
 class _WordTileState extends State<WordTile> {
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
     return Container(
       child: ListTile(
         title: Text(

@@ -27,6 +27,10 @@ dependencies:
   easy_localization: ^1.4.1
   page_transition: ^1.1.6
   loadmore: ^1.0.4
+  flutter_html: ^1.0.0
+
+dependency_overrides:
+  flutter_svg: 0.18.0
 
 dev_dependencies:
   flutter_test:
