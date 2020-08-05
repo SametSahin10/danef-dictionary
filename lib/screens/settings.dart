@@ -1,5 +1,6 @@
 import 'package:danef_dictionary/config/assets.dart';
 import 'package:danef_dictionary/config/constants.dart';
+import 'package:danef_dictionary/utils/navigation.dart';
 import 'package:danef_dictionary/widgets/theme_inherited_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +15,12 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(tr("settings.app_bar_title")),
+        title: Text(
+          tr("settings.app_bar_title"),
+          style: TextStyle(
+            fontFamily: "DidactGothic",
+          ),
+        ),
       ),
       body: SettingsBody(),
     );
@@ -90,7 +96,7 @@ class SettingsBody extends StatelessWidget {
             tr("settings.attributions"),
             style: TextStyle(fontSize: 20),
           ),
-          onTap: launchGooglePlayPage,
+          onTap: () => pushAttributionsScreen(context),
         ),
         Lottie.asset(
           Assets.developer_working_anim_path,
@@ -116,7 +122,6 @@ class SettingsBody extends StatelessWidget {
     );
   }
 }
-
 
 launchShare() async {
   const url = Constants.googlePlayUrl;

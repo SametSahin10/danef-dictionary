@@ -1,3 +1,4 @@
+import 'package:danef_dictionary/screens/attributions.dart';
 import 'package:danef_dictionary/screens/home_screen.dart';
 import 'package:danef_dictionary/screens/settings.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,5 +20,11 @@ void pushHomeScreen(BuildContext context) {
 void pushSettingsScreen(BuildContext context) {
   Navigator.of(context).push(
     MaterialPageRoute(builder: (context) => SettingsScreen()),
+  );
+}
+
+void pushAttributionsScreen(BuildContext context) {
+  Navigator.of(context).push(
+    MaterialPageRoute(builder: (context) => AttributionsScreen()),
   );
 }

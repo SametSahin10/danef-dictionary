@@ -91,7 +91,11 @@ class _SearchFieldState extends State<SearchField> {
 //              await Api.retrieveTurkishWordsByPattern(pattern);
 //    final matchingAdigeWords =
 //              await Api.retrieveAdigeWordsByPattern(pattern);
-    final matchingWords = await Api.retrieveWordsByPattern(pattern);
+    final matchingWords = await Api.retrieveWordsByPattern(
+      pattern: pattern,
+      offset: "0",
+      limit: "30",
+    );
 //    wordsToSuggest.addAll(matchingTurkishWords);
 //    wordsToSuggest.addAll(matchingAdigeWords);
     wordsToSuggest.addAll(matchingWords);

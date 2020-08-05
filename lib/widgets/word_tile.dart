@@ -15,33 +15,34 @@ class WordTile extends StatefulWidget {
 class _WordTileState extends State<WordTile> {
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        widget.word.adige,
-        style: TextStyle(
+    return Container(
+      child: ListTile(
+        title: Text(
+          widget.word.adige,
+          style: TextStyle(
             fontSize: 20,
+          ),
         ),
-      ),
-      subtitle: Text(
-      widget.word.turkish,
-        style: TextStyle(
-          fontSize: 20,
+        subtitle: Text(
+          widget.word.turkish,
+          style: TextStyle(
+            fontSize: 20,
+          ),
         ),
-      ),
-      trailing: IconButton(
-        icon: widget.isFavourite ?
-        Icon(Icons.favorite, color: Colors.green, size: 28) :
-        Icon(Icons.favorite_border, color: Colors.green, size: 28),
-        onPressed: () {
-          setState(() {
-            if (widget.isFavourite) {
-              deleteFromFavorites(widget.word);
-            } else {
-              addWordToFavorites(widget.word);
-            }
-            widget.isFavourite = !widget.isFavourite;
-          });
-        }
+        trailing: IconButton(
+            icon: widget.isFavourite
+                ? Icon(Icons.favorite, color: Colors.green, size: 28)
+                : Icon(Icons.favorite_border, color: Colors.green, size: 28),
+            onPressed: () {
+              setState(() {
+                if (widget.isFavourite) {
+                  deleteFromFavorites(widget.word);
+                } else {
+                  addWordToFavorites(widget.word);
+                }
+                widget.isFavourite = !widget.isFavourite;
+              });
+            }),
       ),
     );
   }
