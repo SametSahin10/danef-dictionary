@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:danef_dictionary/config/constants.dart';
 import 'package:danef_dictionary/models/word.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io' as io;
@@ -8,9 +9,13 @@ import 'dart:io' as io;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
-  static Future<List<Word>> retrieveWords() async {
+  static Future<List<Word>> retrieveWords({
+    @required String offset,
+    @required String limit,
+  }) async {
     final baseUrl = DotEnv().env['BASE_URL'];
-    final url = '$baseUrl${Constants.wordsString}';
+    final url =
+        "$baseUrl${Constants.wordsString}?${Constants.offsetString}=$offset&${Constants.limitString}=$limit";
     final token = await getToken();
     final headers = {io.HttpHeaders.authorizationHeader: 'Bearer $token'};
     try {

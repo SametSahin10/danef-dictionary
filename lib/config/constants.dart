@@ -3,6 +3,8 @@ class Constants {
   static const wordsString = 'words';
   static const turkishString = 'turkish.contains=';
   static const adigeString = 'adige.contains=';
+  static const offsetString = 'offset';
+  static const limitString = 'limit';
 
   static const googlePlayUrl = 'https://play.google.com/store/apps/details?id=com.danef.danef_dictionary';
   static const feedbackUrl = 'mailto:a.sahin.ual@gmail.com';
