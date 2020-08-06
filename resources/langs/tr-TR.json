@@ -9,7 +9,8 @@
     "favourites": "Favoriler"
   },
   "archive": {
-    "could_not_find_words": "Kelime bulunamadı"
+    "could_not_find_words": "Kelime bulunamadı",
+    "loading": "Yükleniyor"
   },
   "search_field_page": {
     "search_again": "Tekrar ara",

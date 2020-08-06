@@ -107,7 +107,7 @@ class _ArchiveBodyState extends State<ArchiveBody> {
       textBuilder: (loadMoreStatus) {
         switch (loadMoreStatus) {
           case LoadMoreStatus.loading:
-            return "Loading words";
+            return tr("archive.loading");
           case LoadMoreStatus.idle:
             return "Loading words idle";
           case LoadMoreStatus.fail:
