@@ -114,6 +114,11 @@ class _SearchFieldState extends State<SearchField> {
         wordsAsStrings.add(matchingWord.turkish);
       }
     });
+    wordsAsStrings.sort((firstString, secondString) {
+      final firstStringLength = firstString.length;
+      final secondStringLength = secondString.length;
+      return firstStringLength.compareTo(secondStringLength);
+    });
     return wordsAsStrings;
   }
 
