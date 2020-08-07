@@ -1,7 +1,6 @@
 import 'package:danef_dictionary/config/app_colors.dart';
 import 'package:danef_dictionary/config/constants.dart';
 import 'package:easy_localization/public.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
@@ -43,7 +42,7 @@ class AttributionsScreen extends StatelessWidget {
             ),
             SizedBox(height: screenHeight * 0.025),
             Html(
-              data: Constants.attrTextLoadingWordsAnim,
+              data: Constants.attrTextGettingWordsFromCloudAnim,
               onLinkTap: (url) => launchURL(url),
               style: {
                 "div": Style(color: Colors.white, fontSize: FontSize.medium)
@@ -51,7 +50,7 @@ class AttributionsScreen extends StatelessWidget {
             ),
             SizedBox(height: screenHeight * 0.025),
             Html(
-              data: Constants.attrTextLoadingWordsAnim,
+              data: Constants.attrTextSleepingCatAnim,
               onLinkTap: (url) => launchURL(url),
               style: {
                 "div": Style(color: Colors.white, fontSize: FontSize.medium)

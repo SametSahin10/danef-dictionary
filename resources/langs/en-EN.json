@@ -9,7 +9,8 @@
     "favourites": "Favourites"
   },
   "archive": {
-    "could_not_find_words": "Could not find words"
+    "could_not_find_words": "Could not find words",
+    "loading": "Loading"
   },
   "search_field_page": {
     "search_again": "Search again",
