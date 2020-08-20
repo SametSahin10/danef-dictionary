@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Meaning extends StatefulWidget {
   String word = 'Word';
@@ -27,12 +28,13 @@ class _MeaningState extends State<Meaning> {
                 left: 18,
                 right: 8,
                 top: 8,
-                bottom: 6),
+                bottom: 6,
+              ),
               child: Text(
                 widget.word,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontFamily: 'OpenSans'
+                style: GoogleFonts.montserrat(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w300,
                 ),
               ),
             ),
@@ -44,26 +46,26 @@ class _MeaningState extends State<Meaning> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 18,
-                  right: 8,
-                  top: 4,
-                  bottom: 12),
+                left: 18,
+                right: 8,
+                top: 4,
+                bottom: 12,
+              ),
               child: Text(
                 widget.meaning,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontFamily: 'OpenSans'
+                style: GoogleFonts.montserrat(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w300,
                 ),
               ),
             ),
           ],
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-          side: BorderSide(
-            width: 0.5,
-            color: Colors.green
-          )
+          borderRadius: BorderRadius.all(
+            Radius.circular(12),
+          ),
+          side: BorderSide(width: 0.5, color: Colors.green),
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:danef_dictionary/models/word.dart';
 import 'package:easy_localization/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SearchField extends StatefulWidget {
   TextEditingController textEditingController;
@@ -44,7 +45,10 @@ class _SearchFieldState extends State<SearchField> {
           });
         },
         textAlign: TextAlign.center,
-        style: DefaultTextStyle.of(context).style.copyWith(fontSize: 20),
+        style: GoogleFonts.montserrat(
+          fontSize: 18,
+          fontWeight: FontWeight.w300,
+        ),
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.search),
           suffixIcon: Visibility(
@@ -55,6 +59,10 @@ class _SearchFieldState extends State<SearchField> {
             ),
           ),
           hintText: tr("search_field_page.search_a_word"),
+          hintStyle: GoogleFonts.montserrat(
+            fontSize: 18,
+            fontWeight: FontWeight.w300,
+          ),
         ),
       ),
       suggestionsBoxDecoration: SuggestionsBoxDecoration(
@@ -72,8 +80,9 @@ class _SearchFieldState extends State<SearchField> {
           ),
           title: Text(
             suggestion,
-            style: TextStyle(
+            style: GoogleFonts.montserrat(
               fontSize: 18,
+              fontWeight: FontWeight.w300,
             ),
           ),
         );
@@ -143,8 +152,9 @@ Widget buildNoItemsFoundWidget() {
       child: Text(
         tr("search_field_page.no_match_found_desc_text"),
         textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 22,
+        style: GoogleFonts.montserrat(
+          fontSize: 20,
+          fontWeight: FontWeight.w300,
         ),
       ),
     ),
